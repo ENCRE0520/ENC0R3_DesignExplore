@@ -1,0 +1,96 @@
+/* Radio */
+.radio-widget {
+  --display-inset: 14px;
+  --display-width: 212px;
+  --display-height: 120px;
+  --display-radius: 36px;
+  --action-size: 48px;
+  --display-text-inset: 10px;
+  --needle-width: 4px;
+  --action-gap: 8px;
+  background: #313131;
+  color: #5b5b5b;
+}
+
+.radio-display {
+  position: absolute;
+  left: var(--display-inset);
+  top: var(--display-inset);
+  width: var(--display-width);
+  height: var(--display-height);
+  overflow: hidden;
+  border-radius: var(--display-radius);
+  corner-shape: squircle;
+  background: #999;
+  color: #232323;
+  box-shadow: inset 0 0 25px #333;
+}
+
+.radio-ticks {
+  height: 47px;
+  background: repeating-linear-gradient(90deg, #555 0 1px, transparent 1px 4px);
+}
+
+.needle {
+  position: absolute;
+  left: 104px;
+  top: 0;
+  width: var(--needle-width);
+  height: var(--display-height);
+  background: #d40000;
+}
+
+.radio-display strong {
+  position: absolute;
+  left: var(--display-text-inset);
+  top: 48px;
+  font: 48px/48px var(--font-pixel);
+  font-weight: 400;
+}
+
+.radio-display strong small {
+  display: inline-block;
+  margin-right: 6px;
+  font: 32px/32px var(--font-pixel);
+}
+
+.radio-display span {
+  position: absolute;
+  left: var(--display-text-inset);
+  bottom: 7px;
+  font: 14px/14px var(--font-pixel);
+}
+
+.radio-widget>p {
+  position: absolute;
+  left: var(--display-inset);
+  top: 140px;
+  font: 600 14px/14px 'Afacad', sans-serif;
+}
+
+.radio-actions {
+  position: absolute;
+  left: var(--display-inset);
+  right: var(--display-inset);
+  bottom: var(--display-inset);
+  display: flex;
+  gap: var(--action-gap);
+}
+
+.radio-actions button {
+  width: var(--action-size);
+  height: var(--action-size);
+  border: var(--widget-border-thin) solid #111;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: linear-gradient(#4e4e4e, #292929);
+  color: #aaa;
+  box-shadow: inset 0 0 5px #777;
+}
+
+.radio-actions .power {
+  margin-left: auto;
+  background: radial-gradient(circle, #387fe3, #0d3268);
+  color: #9cc5ff;
+  font-size: 25px;
+}

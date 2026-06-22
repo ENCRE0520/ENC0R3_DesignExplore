@@ -1,0 +1,113 @@
+/* Expenses */
+.expense-widget {
+  --summary-inset: 28px;
+  --summary-width: 140px;
+  --add-control-size: 40px;
+  --calendar-height: 88px;
+  --calendar-dot-size: 16px;
+  background: #e4e4e4;
+}
+
+.expense-copy {
+  position: absolute;
+  left: var(--summary-inset);
+  top: var(--summary-inset);
+  width: var(--summary-width);
+  height: 84px;
+  color: #58606a99;
+}
+
+.expense-copy small {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.expense-copy strong {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  color: #4d4d4d;
+  font: 600 40px/48px var(--font-main);
+}
+
+.expense-copy strong i {
+  width: 16px;
+  font: 700 24px/29px var(--font-main);
+  font-style: normal;
+}
+
+.expense-copy span {
+  position: absolute;
+  left: 0;
+  top: 66px;
+  width: var(--summary-width);
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.expense-add {
+  position: absolute;
+  right: 29px;
+  top: var(--summary-inset);
+  width: var(--add-control-size);
+  height: var(--add-control-size);
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: white;
+  color: #676767;
+  font-size: 31px;
+  font-weight: 200;
+  line-height: 38px;
+}
+
+.expense-calendar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--widget-design-size);
+  height: var(--calendar-height);
+  padding: 14px;
+  display: grid;
+  grid-template-columns: repeat(9, var(--calendar-dot-size));
+  grid-auto-rows: var(--calendar-dot-size);
+  column-gap: 5.777px;
+  row-gap: 6px;
+  border-top: var(--widget-border-thin) solid #d9d9d9;
+  background: #f2f2f2;
+}
+
+.expense-calendar i {
+  width: var(--calendar-dot-size);
+  height: var(--calendar-dot-size);
+  border: var(--widget-border-thin) solid white;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: #ddc3ff;
+  box-shadow: inset 0 0 4px #ffffff4d;
+}
+
+.expense-calendar .mid {
+  background: #c17cff;
+}
+
+.expense-calendar .hot {
+  background: #9747ff;
+}
+
+.expense-calendar .empty {
+  background: #efefef;
+  border-color: #ddd;
+}
+
+.expense-calendar .ring {
+  background: #f2f2f2;
+  border: var(--widget-border-regular) solid #9747ff;
+}

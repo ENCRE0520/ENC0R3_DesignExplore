@@ -1,0 +1,73 @@
+/* Music */
+.music-widget {
+  --side-control-width: 58.5px;
+  --primary-control-size: 76.5px;
+  --control-height: 76.5px;
+  --note-control-size: 56px;
+  background: #f5c3fe;
+  border-radius: var(--widget-pill-radius);
+  corner-shape: round;
+  text-align: center;
+  color: #2b0059;
+  font-family: var(--font-rounded);
+}
+
+.song {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 36px;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.song strong {
+  font-size: 16px;
+  line-height: 17px;
+  white-space: nowrap;
+}
+
+.song small {
+  font-size: 14px;
+  opacity: 1;
+}
+
+.music-controls {
+  position: absolute;
+  top: 82px;
+  left: 21px;
+  display: flex;
+  gap: 2.25px;
+}
+
+.music-controls button {
+  width: var(--side-control-width);
+  height: var(--control-height);
+  border-radius: var(--widget-pill-radius);
+  corner-shape: round;
+  background: #c587f7;
+  color: #2b0059;
+  font-weight: 800;
+}
+
+.music-controls .pause {
+  width: var(--primary-control-size);
+  background: #8029ce;
+  color: white;
+  font-size: 26px;
+}
+
+.note {
+  position: absolute;
+  left: 92px;
+  top: 170px;
+  width: var(--note-control-size);
+  height: var(--note-control-size);
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: #ffebff;
+  color: #2b0059;
+  font-size: 26px;
+}

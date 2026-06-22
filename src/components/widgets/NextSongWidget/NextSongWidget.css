@@ -1,0 +1,101 @@
+/* CD player */
+.next-widget {
+  --disc-size: 184px;
+  --disc-inset: 28px;
+  --disc-center-size: 60px;
+  --disc-center-offset: 56px;
+  --disc-hole-size: 28px;
+  --disc-hole-offset: 72px;
+  --player-width: 212px;
+  --player-height: 52px;
+  --player-button-width: 53px;
+  --player-control-height: 40px;
+  --player-inset: 14px;
+  --player-gap: 4px;
+  --player-padding: 6px;
+  background: #e6e6e6;
+}
+
+.disc {
+  position: absolute;
+  left: var(--disc-inset);
+  top: var(--disc-inset);
+  width: var(--disc-size);
+  height: var(--disc-size);
+  border: 6px solid white;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: conic-gradient(from 20deg, #d7fdff, #fff4d7, #ceffec, #ffd6e8, #bfd5ff, #d9fff8, #fff3d6, #bde4ff);
+  box-shadow: 0 0 24px #0000000d;
+}
+
+.disc::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: repeating-radial-gradient(circle, #ffffff08 0 2px, #0000000d 3px 4px);
+}
+
+.disc i {
+  position: absolute;
+  z-index: 2;
+  left: var(--disc-center-offset);
+  top: var(--disc-center-offset);
+  width: var(--disc-center-size);
+  height: var(--disc-center-size);
+  border: 4px solid #252525;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: #bfc2bf;
+}
+
+.disc b {
+  position: absolute;
+  z-index: 3;
+  left: var(--disc-hole-offset);
+  top: var(--disc-hole-offset);
+  width: var(--disc-hole-size);
+  height: var(--disc-hole-size);
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: #e5e6e3;
+}
+
+.player-bar {
+  position: absolute;
+  left: var(--player-inset);
+  bottom: var(--player-inset);
+  width: var(--player-width);
+  height: var(--player-height);
+  display: flex;
+  gap: var(--player-gap);
+  padding: var(--player-padding);
+  border-radius: var(--widget-radius-md);
+  corner-shape: squircle;
+  background: #000;
+  box-shadow: inset 0 -1px .8px #ffffff80, inset 0 4px 4px #ffffff80, 0 16px 32px #0000004d;
+}
+
+.player-bar button,
+.player-bar span {
+  height: var(--player-control-height);
+  border-radius: var(--widget-radius-sm);
+  corner-shape: squircle;
+  background: linear-gradient(#eee, #aaa, #eee);
+  box-shadow: inset 0 0 6px #333;
+}
+
+.player-bar button {
+  width: var(--player-button-width);
+  font-size: 20px;
+}
+
+.player-bar span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 16px/16px var(--font-chivo);
+}

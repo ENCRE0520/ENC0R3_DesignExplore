@@ -1,0 +1,100 @@
+/* Recording */
+.recording-widget {
+  --waveform-height: 144px;
+  --wave-bar-width: 2px;
+  --record-meta-width: 112px;
+  --record-meta-height: 44px;
+  --record-control-size: 44px;
+  --record-indicator-size: 8px;
+  --control-inset: 14px;
+  --control-gap: 4px;
+  --waveform-inset: 16px;
+  --waveform-gap: 2px;
+  background: #e6e6e6;
+  font-family: var(--font-mohave);
+}
+
+.waveform {
+  position: absolute;
+  top: var(--waveform-inset);
+  left: 0px;
+  width: var(--widget-design-size);
+  height: var(--waveform-height);
+  display: flex;
+  align-items: center;
+  gap: var(--waveform-gap);
+  border-bottom: var(--widget-border-thin) dashed #d5d5d5;
+}
+
+.waveform i {
+  display: block;
+  width: var(--wave-bar-width);
+  background: #91949b;
+}
+
+.waveform i.playhead {
+  width: var(--wave-bar-width);
+  background: #db0000;
+}
+
+.record-meta {
+  position: absolute;
+  left: var(--waveform-inset);
+  top: 178px;
+  width: var(--record-meta-width);
+  height: var(--record-meta-height);
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  color: #91949b;
+}
+
+.record-meta span {
+  display: block;
+  height: 12px;
+  font: 600 12px var(--font-mohave);
+}
+
+.record-meta span b {
+  display: inline-block;
+  width: var(--record-indicator-size);
+  height: var(--record-indicator-size);
+  margin: 2px 4px 0 0;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  background: #db0000;
+}
+
+.record-meta strong {
+  display: block;
+  width: var(--record-meta-width);
+  font: 500 32px/32px var(--font-mohave);
+  white-space: nowrap;
+}
+
+.record-pause,
+.record-stop {
+  position: absolute;
+  bottom: var(--control-inset);
+  width: var(--record-control-size);
+  height: var(--record-control-size);
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+}
+
+.record-pause {
+  right: calc(var(--control-inset) + var(--record-control-size) + var(--control-gap));
+  background: #cbcbcb;
+  color: white;
+  font-weight: 800;
+}
+
+.record-stop {
+  right: var(--control-inset);
+  background: #db0000;
+}
+
+.record-stop i,
+.record-pause i {
+  font-size: 20px;
+}

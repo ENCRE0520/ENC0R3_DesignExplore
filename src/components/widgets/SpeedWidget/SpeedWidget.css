@@ -1,0 +1,74 @@
+/* Speed */
+.speed-widget {
+  --speed-content-inset: 28px;
+  --dial-size: 72px;
+  --dial-border: var(--widget-border-regular);
+  --route-width: 31px;
+  --route-height: 34px;
+  --route-stroke: 4px;
+  --route-turn-radius: 15px;
+  --route-head-size: 15px;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-mohave);
+}
+
+.route-arrow {
+  position: absolute;
+  left: 35px;
+  top: 36px;
+  width: var(--route-width);
+  height: var(--route-height);
+  border-left: var(--route-stroke) solid #fff;
+  border-top: var(--route-stroke) solid #fff;
+  border-radius: var(--route-turn-radius) 0 0;
+}
+
+.route-arrow::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -9px;
+  width: var(--route-head-size);
+  height: var(--route-head-size);
+  border-top: var(--route-stroke) solid #fff;
+  border-right: var(--route-stroke) solid #fff;
+  transform: rotate(45deg);
+}
+
+.distance {
+  position: absolute;
+  left: var(--speed-content-inset);
+  top: 80px;
+  display: flex;
+  font: 700 36px/36px var(--font-mohave);
+}
+
+.distance span {
+  font: inherit;
+}
+
+.speed-dial {
+  position: absolute;
+  left: var(--speed-content-inset);
+  top: 140px;
+  width: var(--dial-size);
+  height: var(--dial-size);
+  border: var(--dial-border) solid #fff;
+  border-radius: var(--widget-circle-radius);
+  corner-shape: round;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 var(--dial-border) #282828, inset -8px 12px 10px #ffffff33, inset -2px 4px 10px #ffffff80;
+}
+
+.speed-dial strong {
+  font: 700 20px/20px var(--font-mohave);
+}
+
+.speed-dial small {
+  color: #ffffff99;
+  font: 700 14px/14px var(--font-mohave);
+}

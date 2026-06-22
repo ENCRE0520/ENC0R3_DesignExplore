@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TabNav from './components/TabNav';
 import CardGrid from './components/CardGrid';
 import buttonData from './data/buttons';
+import widgetData from './data/widgets';
 import './index.css';
 
 const PLACEHOLDER_TABS = ['inputs', 'cards', 'loading', 'more'];
@@ -23,6 +24,7 @@ export default function App() {
       {/* Content */}
       <main className="content">
         {activeTab === 'buttons' && <CardGrid items={buttonData} />}
+        {activeTab === 'widgets' && <CardGrid items={widgetData} />}
 
         {PLACEHOLDER_TABS.includes(activeTab) && (
           <div className="placeholder-page">

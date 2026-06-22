@@ -4,6 +4,7 @@ const tabs = [
   { id: 'cards', label: 'Cards' },
   { id: 'loading', label: 'Loading' },
   { id: 'more', label: 'More' },
+  { id: 'widgets', label: 'Widgets' },
 ];
 
 export default function TabNav({ active, onChange }) {
