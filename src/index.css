@@ -1,0 +1,361 @@
+/* ═══════════════════════════════════════════
+   Design Explorer — Global Styles
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── IconFont ── */
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/c/font_5198522_60l61i4l3qx.woff2?t=1782054710781') format('woff2'),
+       url('//at.alicdn.com/t/c/font_5198522_60l61i4l3qx.woff?t=1782054710781') format('woff'),
+       url('//at.alicdn.com/t/c/font_5198522_60l61i4l3qx.ttf?t=1782054710781') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #ffffff;
+  --card-bg: #f5f5f5;
+  --text: #000000;
+  --text-secondary: #888888;
+  --font-main: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --card-size: 240px;
+  --gap: 24px;
+  --margin-x: 72px;
+}
+
+html {
+  font-family: var(--font-main);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════
+   App Layout
+   ═══════════════════════════════ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  max-width: 1440px;
+  padding: 80px var(--margin-x) 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+/* ── Tab Navigation (centered) ── */
+.tab-nav {
+  width: 100%;
+  max-width: 1440px;
+  padding: 40px var(--margin-x) 0;
+  display: flex;
+  justify-content: center;
+}
+
+.tab-list {
+  display: flex;
+  gap: 4px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.tab-item {
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.tab-item:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.tab-item.active {
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Content ── */
+.content {
+  width: 100%;
+  max-width: 1440px;
+  padding: var(--gap) var(--margin-x) 120px;
+  flex: 1;
+}
+
+/* ── Card Grid ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card-size));
+  gap: var(--gap);
+  justify-content: center;
+  max-width: calc(5 * var(--card-size) + 4 * var(--gap));
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════
+   Design Card — superellipse via corner-shape
+   ═══════════════════════════════ */
+
+.design-card {
+  width: var(--card-size);
+  height: var(--card-size);
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: default;
+  border-radius: 28px;
+  corner-shape: squircle;
+  transition: transform 0.3s ease;
+  animation: cardIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Card entrance stagger */
+.design-card:nth-child(1)  { animation-delay: 0.02s; }
+.design-card:nth-child(2)  { animation-delay: 0.06s; }
+.design-card:nth-child(3)  { animation-delay: 0.10s; }
+.design-card:nth-child(4)  { animation-delay: 0.14s; }
+.design-card:nth-child(5)  { animation-delay: 0.18s; }
+.design-card:nth-child(6)  { animation-delay: 0.06s; }
+.design-card:nth-child(7)  { animation-delay: 0.10s; }
+.design-card:nth-child(8)  { animation-delay: 0.14s; }
+.design-card:nth-child(9)  { animation-delay: 0.18s; }
+.design-card:nth-child(10) { animation-delay: 0.22s; }
+.design-card:nth-child(11) { animation-delay: 0.10s; }
+.design-card:nth-child(12) { animation-delay: 0.14s; }
+.design-card:nth-child(13) { animation-delay: 0.18s; }
+.design-card:nth-child(14) { animation-delay: 0.22s; }
+.design-card:nth-child(15) { animation-delay: 0.26s; }
+.design-card:nth-child(16) { animation-delay: 0.14s; }
+.design-card:nth-child(17) { animation-delay: 0.18s; }
+.design-card:nth-child(18) { animation-delay: 0.22s; }
+.design-card:nth-child(19) { animation-delay: 0.26s; }
+.design-card:nth-child(20) { animation-delay: 0.30s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Slow Motion Toggle ── */
+.slow-motion-toggle {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  z-index: 10;
+  border-radius: 12px;
+  corner-shape: squircle;
+  color: #999;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0;
+  letter-spacing: -0.5px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.slow-motion-toggle:hover {
+  background: #DDDDDD;
+  color: #000;
+}
+
+.slow-motion-toggle:active {
+  background: #cccccc;
+  color: #000;
+}
+
+.slow-motion-toggle.active {
+  color: #6c47ff;
+  background: rgba(108, 71, 255, 0.1);
+}
+
+.slow-motion-toggle.active:hover {
+  background: rgba(108, 71, 255, 0.15);
+}
+
+/* ── Code Icon Trigger ── */
+.code-icon-trigger {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  z-index: 10;
+  border-radius: 12px;
+  corner-shape: squircle;
+  color: #999;
+  transition: background 0.15s, color 0.15s;
+}
+
+.code-icon-trigger:hover {
+  background: #DDDDDD;
+  color: #000;
+}
+
+.code-icon-trigger:active {
+  background: #cccccc;
+  color: #000;
+}
+
+/* ── Code Tooltip ── */
+.code-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #1a1a1a;
+  color: #e0e0e0;
+  padding: 16px;
+  border-radius: 8px;
+  min-width: 260px;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.15s ease;
+}
+
+.code-tooltip pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-tooltip code {
+  color: #a5d6ff;
+}
+
+.code-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.code-close:hover { color: #fff; }
+
+
+
+/* ═══════════════════════════════
+   Placeholder Page
+   ═══════════════════════════════ */
+
+.placeholder-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  text-align: center;
+  gap: 16px;
+}
+
+.placeholder-icon { margin-bottom: 8px; opacity: 0.4; }
+.placeholder-page h2 { font-size: 24px; font-weight: 600; }
+.placeholder-page p  { font-size: 15px; color: var(--text-secondary); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════
+   Responsive
+   ═══════════════════════════════ */
+
+@media (max-width: 1440px) {
+  :root { --margin-x: 40px; }
+  .title { font-size: 40px; }
+}
+
+@media (max-width: 1024px) {
+  :root { --margin-x: 24px; }
+  .title { font-size: 32px; }
+  .header { padding-top: 60px; }
+  .card-grid { justify-content: center; }
+}
+
+@media (max-width: 640px) {
+  :root { --margin-x: 16px; --card-size: 160px; --gap: 12px; }
+  .title { font-size: 28px; }
+  .header { padding-top: 40px; }
+  .tab-nav { padding-top: 24px; }
+  .tab-item { padding: 8px 16px; font-size: 13px; }
+  .content { padding-bottom: 60px; }
+}

@@ -1,0 +1,69 @@
+.button {
+  background: #6c47ff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 16px 40px;
+  height: auto;
+  gap: 0;
+  /* Remove gap inherited from BaseButton so characters don't spread out */
+  scale: 1;
+  transition: scale 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.buttonHovered {
+  scale: 0.98;
+}
+
+.buttonPressed {
+  scale: 0.95;
+  background-color: #5535d2;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  border-radius: inherit;
+  z-index: -1;
+  transform: scale(calc(1 / 0.98));
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.buttonHovered::after,
+.buttonPressed::after {
+  transform: scale(1);
+}
+
+.slowMotion {
+  transition-duration: 2s !important;
+}
+
+.slowMotion::after {
+  transition-duration: 2s !important;
+}
+
+/* Character Animation */
+.char {
+  display: inline-block;
+  white-space: pre;
+}
+
+.flyOut {
+  transform: translateY(-20px);
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.flyIn {
+  transform: translateY(20px);
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.visible {
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0px);
+}

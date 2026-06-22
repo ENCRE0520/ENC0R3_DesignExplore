@@ -1,0 +1,66 @@
+.button {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+  border-radius: 28px;
+  corner-shape: squircle;
+  overflow: hidden;
+}
+
+.button .iconfont {
+  font-size: 16px;
+  line-height: 1;
+  color: inherit;
+}
+
+/* ── Sizes ── */
+.size-sm { padding: 8px 16px;  font-size: 13px; height: 36px; border-radius: 22px; }
+.size-sm .iconfont { font-size: 13px; }
+
+.size-md { padding: 12px 24px; font-size: 15px; height: 44px; border-radius: 28px; }
+
+.size-lg { padding: 16px 32px; font-size: 17px; height: 56px; border-radius: 34px; }
+.size-lg .iconfont { font-size: 18px; }
+
+.size-xl { padding: 20px 40px; font-size: 19px; height: 68px; border-radius: 40px; }
+.size-xl .iconfont { font-size: 20px; }
+
+.full-width { width: calc(100% - 32px); }
+.icon-only  { width: 44px; height: 44px; padding: 0; }
+.icon-only .iconfont { font-size: 20px; }
+
+/* ── Disabled & Loading ── */
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.loading {
+  cursor: wait;
+}
+
+.loadingText { opacity: 0.4; }
+
+.spinner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
