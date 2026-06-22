@@ -12,8 +12,8 @@ const buttonData = [
     Component: TextSwapButton,
     props: {
       variant: 'text-swap',
-      defaultText: 'Get Started',
-      hoverText: "Let's Go \ue6bc",
+      defaultText: 'Button',
+      hoverText: "Button \ue6bc",
     },
     code: `/* 文字拆分 + 交错飞出弹入 */
 .btn .char {

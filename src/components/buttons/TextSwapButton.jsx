@@ -37,7 +37,7 @@ function setChars(el, text) {
 export default function TextSwapButton({ data, isSlowMotion }) {
   const {
     disabled = false,
-    defaultText = 'Get Started',
+    defaultText = 'Button',
     hoverText = 'Let\'s Go \ue6bc',
   } = data || {};
 

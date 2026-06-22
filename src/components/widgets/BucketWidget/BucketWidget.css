@@ -2,7 +2,7 @@
 .bucket-widget {
   --countdown-width: 144px;
   --countdown-height: 76px;
-  --countdown-radius: var(--widget-radius-lg);
+  --countdown-radius: 28px;
   --digit-width: 24px;
   --tag-track-width: 440px;
   display: flex;
@@ -24,7 +24,7 @@
   height: var(--countdown-height);
   margin: 0 0 26px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 12px;
   border: var(--widget-border-regular) solid #777;

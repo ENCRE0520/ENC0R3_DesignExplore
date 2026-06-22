@@ -19,7 +19,7 @@ export default function RecordingWidget() {
         ))}
       </div>
       <div className="record-meta">
-        <span><b /> recording</span>
+        <span><b />recording</span>
         <strong>00:05:20</strong>
       </div>
       <button className="record-pause" aria-label="Pause recording">

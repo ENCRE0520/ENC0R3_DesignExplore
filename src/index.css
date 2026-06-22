@@ -7,18 +7,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad:wght@600&family=Chivo+Mono&family=M+PLUS+Code+Latin:wght@600;700&family=Mohave:wght@500;600;700&family=Pixelify+Sans&display=swap');
 
 /* ── IconFont ── */
-@font-face {
-  font-family: 'iconfont';
-  src: url('//at.alicdn.com/t/c/font_5198522_60l61i4l3qx.woff2?t=1782054710781') format('woff2'),
-    url('//at.alicdn.com/t/c/font_5198522_60l61i4l3qx.woff?t=1782054710781') format('woff'),
-    url('//at.alicdn.com/t/c/font_5198522_60l61i4l3qx.ttf?t=1782054710781') format('truetype');
-}
+@import url('https://at.alicdn.com/t/c/font_5198522_60l61i4l3qx.css');
 
 .iconfont {
-  font-family: "iconfont" !important;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: inherit !important;
 }
 
 /* ── Reset ── */
@@ -350,6 +342,106 @@ body {
   color: #000;
 }
 
+/* ── Widget Expand Modal ── */
+.widget-expand-trigger {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  z-index: 10;
+  border-radius: 12px;
+  corner-shape: squircle;
+  color: #999;
+  transition: background 0.15s, color 0.15s;
+}
+
+.widget-expand-trigger:hover {
+  background: #DDDDDD;
+  color: #000;
+}
+
+.widget-expand-trigger:active {
+  background: #cccccc;
+  color: #000;
+}
+
+.widget-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.widget-modal-overlay.open {
+  opacity: 1;
+}
+
+.widget-modal-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.widget-modal-content .expanded-card {
+  width: calc(var(--card-size) * 2);
+  height: calc(var(--card-size) * 2);
+  border-radius: 48px;
+  --widget-preview-size: 240px;
+  --widget-scale: 1;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.04);
+  margin: 0;
+  /* FLIP animation will drive the transform and border-radius inline */
+  will-change: transform, border-radius;
+  animation: none !important;
+}
+
+.widget-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+  z-index: 1010;
+}
+
+.widget-modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.widget-modal-close:active {
+  transform: scale(0.95);
+}
+
+/* Removed popIn animation */
+
 /* ── Code Tooltip ── */
 .code-tooltip {
   position: absolute;
@@ -545,4 +637,7 @@ body {
   font: inherit;
   border: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -39,7 +39,7 @@
 .distance {
   position: absolute;
   left: var(--speed-content-inset);
-  top: 80px;
+  top: 86px;
   display: flex;
   font: 700 36px/36px var(--font-mohave);
 }
@@ -71,4 +71,41 @@
 .speed-dial small {
   color: #ffffff99;
   font: 700 14px/14px var(--font-mohave);
+}
+
+/* Rolling Number Animation */
+.rolling-number {
+  display: inline-flex;
+  font-variant-numeric: tabular-nums;
+}
+
+.rolling-digit-container {
+  display: inline-flex;
+  align-items: flex-start;
+  width: 1ch;
+  height: 1.4em;
+  margin: -0.2em 0;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+}
+
+.rolling-digit-track {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.digit-item {
+  height: 1.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }

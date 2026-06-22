@@ -42,15 +42,16 @@
   left: var(--waveform-inset);
   top: 178px;
   width: var(--record-meta-width);
-  height: var(--record-meta-height);
   display: flex;
   flex-direction: column;
-  row-gap: 6px;
+  row-gap: 8px;
   color: #91949b;
 }
 
 .record-meta span {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   height: 12px;
   font: 600 12px var(--font-mohave);
 }
@@ -59,7 +60,6 @@
   display: inline-block;
   width: var(--record-indicator-size);
   height: var(--record-indicator-size);
-  margin: 2px 4px 0 0;
   border-radius: var(--widget-circle-radius);
   corner-shape: round;
   background: #db0000;

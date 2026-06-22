@@ -57,8 +57,13 @@
   flex-direction: column;
 }
 
+.flight-main>div:first-child {
+  padding-left: 8px;
+}
+
 .flight-main>div:last-child {
   text-align: right;
+  padding-right: 8px;
 }
 
 .flight-main small,
@@ -80,9 +85,18 @@
 }
 
 .flight-path {
-  text-align: center !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #8e9296;
   font-size: 12px;
+}
+
+.flight-path .path-visual {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .flight-path small {
@@ -109,6 +123,11 @@
   font-size: 10px;
   line-height: 10px;
   gap: var(--detail-gap);
+  padding-left: 8px;
+}
+
+.flight-details span:first-child {
+  padding-left: 0;
 }
 
 .flight-details span:last-child {
