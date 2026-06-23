@@ -136,13 +136,13 @@
   transition: opacity 200ms cubic-bezier(.2, 0, 0, 1), transform 200ms cubic-bezier(.2, 0, 0, 1);
 }
 
-.playback-icon .icon-pause-square,
+.playback-icon .icon-pause,
 .is-playing .playback-icon .icon-play {
   opacity: 0;
   transform: rotate(-45deg) scale(.5);
 }
 
-.is-playing .playback-icon .icon-pause-square {
+.is-playing .playback-icon .icon-pause {
   opacity: 1;
   transform: none;
 }

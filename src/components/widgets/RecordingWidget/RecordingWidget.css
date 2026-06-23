@@ -9,7 +9,7 @@
   --control-inset: 14px;
   --control-gap: 4px;
   --waveform-inset: 16px;
-  --waveform-gap: 2px;
+  --waveform-gap: 1px;
   background: #e6e6e6;
   font-family: var(--font-mohave);
 }
@@ -17,24 +17,49 @@
 .waveform {
   position: absolute;
   top: var(--waveform-inset);
-  left: 0px;
+  left: 0;
   width: var(--widget-design-size);
   height: var(--waveform-height);
-  display: flex;
-  align-items: center;
-  gap: var(--waveform-gap);
+  overflow: hidden;
   border-bottom: var(--widget-border-thin) dashed #d5d5d5;
 }
 
-.waveform i {
-  display: block;
-  width: var(--wave-bar-width);
-  background: #91949b;
+.waveform::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 50%;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #91949b 0 2px, transparent 2px 3px) center / 100% 1px no-repeat,
+    #e6e6e6;
+}
+
+.wave-history {
+  position: absolute;
+  inset: 0 50% 0 0;
+  width: 50%;
+  height: 100%;
+  opacity: 1;
+  transform: scaleY(1);
+  transform-origin: center;
+  transition: opacity 180ms linear, transform 180ms cubic-bezier(.2, 0, 0, 1);
+}
+
+.is-stopped .wave-history {
+  opacity: 0;
+  transform: scaleY(0);
 }
 
 .waveform i.playhead {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
   width: var(--wave-bar-width);
+  height: 126px;
   background: #db0000;
+  transform: translateY(-50%);
 }
 
 .record-meta {
@@ -80,6 +105,20 @@
   height: var(--record-control-size);
   border-radius: var(--widget-circle-radius);
   corner-shape: round;
+  transition: opacity 160ms linear, transform 120ms cubic-bezier(.2, 0, 0, 1), filter 120ms linear;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.record-pause:hover,
+.record-stop:hover {
+  filter: brightness(.96);
+}
+
+.record-pause:active,
+.record-stop:active {
+  transform: scale(.9);
+  filter: brightness(.9);
 }
 
 .record-pause {
@@ -89,9 +128,16 @@
   font-weight: 800;
 }
 
+.is-stopped .record-pause {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.8);
+}
+
 .record-stop {
   right: var(--control-inset);
   background: #db0000;
+  color: white;
 }
 
 .record-stop i,

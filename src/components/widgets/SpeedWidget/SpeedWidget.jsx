@@ -56,12 +56,12 @@ export default function SpeedWidget() {
 
   useEffect(() => {
     const distanceTimer = setInterval(() => {
-      setDistance(d => Math.max(200, d - 1));
-    }, 150);
+      setDistance(d => Math.max(200, d - 10));
+    }, 1500);
 
     const speedTimer = setInterval(() => {
       setSpeed(s => Math.min(50, s + 1));
-    }, 400);
+    }, 1500);
 
     return () => {
       clearInterval(distanceTimer);

@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad:wght@600&family=Chivo+Mono&family=M+PLUS+Code+Latin:wght@600;700&family=Mohave:wght@500;600;700&family=Pixelify+Sans&display=swap');
 
 /* ── IconFont ── */
-@import url('https://at.alicdn.com/t/c/font_5198522_60l61i4l3qx.css');
+@import url('https://at.alicdn.com/t/c/font_5198522_teu784wutyq.css');
 
 .iconfont {
   font-size: inherit !important;
@@ -406,10 +406,9 @@ body {
   border-radius: 48px;
   --widget-preview-size: 240px;
   --widget-scale: 1;
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.04);
   margin: 0;
   /* FLIP animation will drive the transform and border-radius inline */
-  will-change: transform, border-radius;
+  will-change: transform, border-radius, background-color;
   animation: none !important;
 }
 

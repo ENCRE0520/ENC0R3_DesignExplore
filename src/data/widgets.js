@@ -9,6 +9,7 @@ import NextSongWidget from '../components/widgets/NextSongWidget/NextSongWidget'
 import RadioWidget from '../components/widgets/RadioWidget/RadioWidget';
 import StockWidget from '../components/widgets/StockWidget/StockWidget';
 import FlameWidget from '../components/widgets/FlameWidget/FlameWidget';
+import FormulaOneWidget from '../components/widgets/FormulaOneWidget/FormulaOneWidget';
 
 const widgetData = [
   { id: 'speed', Component: SpeedWidget },
@@ -22,6 +23,7 @@ const widgetData = [
   { id: 'radio', Component: RadioWidget },
   { id: 'stock', Component: StockWidget },
   { id: 'flame', Component: FlameWidget },
+  { id: 'formula-one', Component: FormulaOneWidget },
 ].map((item) => ({ ...item, controls: false }));
 
 export default widgetData;

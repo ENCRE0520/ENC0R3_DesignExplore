@@ -61,7 +61,7 @@ export default function MusicWidget() {
     <div className="music-controls">
       <button type="button" aria-label="Previous track" onPointerDown={setRippleOrigin} onClick={() => changeSong(-1)}><i className="iconfont icon-skip-back" /></button>
       <button type="button" className={`pause ${isPlaying ? 'is-playing' : ''}`} aria-label={isPlaying ? 'Pause' : 'Play'} onPointerDown={setRippleOrigin} onClick={() => setIsPlaying((playing) => !playing)}>
-        <span className="playback-icon"><i className="iconfont icon-play" /><i className="iconfont icon-pause-square" /></span>
+        <span className="playback-icon"><i className="iconfont icon-play" /><i className="iconfont icon-pause" /></span>
       </button>
       <button type="button" aria-label="Next track" onPointerDown={setRippleOrigin} onClick={() => changeSong(1)}><i className="iconfont icon-skip-forward" /></button>
     </div>

@@ -3,7 +3,7 @@ import './FlightWidget.css';
 export default function FlightWidget() {
   return (
     <div className="widget flight-widget">
-      <div className="sky"><div className="wing" /></div>
+      <div className="sky" />
       <div className="boarding-card">
         <div className="flight-main">
           <div><small>17:20PM</small><strong>SKY</strong><span>Lakeside</span></div>
@@ -11,7 +11,7 @@ export default function FlightWidget() {
             <div className="path-visual">
               <span>●</span>
               <span className="line">─</span>
-              <i className="iconfont icon-send-01" />
+              <i className="iconfont icon-plane" />
               <span className="line">─</span>
               <span>●</span>
             </div>

@@ -1,0 +1,63 @@
+.formula-one-widget {
+  background: linear-gradient(#750e21, #400007);
+  color: #fff;
+  font-family: var(--font-main);
+}
+
+.formula-one-car {
+  position: absolute;
+  top: 0;
+  left: 79.4px;
+  width: 160.6px;
+  height: 240px;
+  object-fit: cover;
+}
+
+
+.formula-one-ferrari-logo {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 18px;
+  height: 24px;
+  background: url('/daily-ferrari-logo.png') left center / 60px 24px no-repeat;
+}
+
+.formula-one-driver {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  width: 123px;
+}
+
+.formula-one-driver-name {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.formula-one-number {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  font-size: 8px;
+}
+
+.formula-one-driver-name strong,
+.formula-one-points {
+  font-weight: 800;
+}
+
+.formula-one-points {
+  display: block;
+  margin-top: 2px;
+  font-size: 24px;
+  line-height: 1;
+}

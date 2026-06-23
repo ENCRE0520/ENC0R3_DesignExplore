@@ -28,16 +28,18 @@
 
 .radio-ticks {
   height: 47px;
-  background: repeating-linear-gradient(90deg, #555 0 1px, transparent 1px 4px);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 16px, #555 16px 18px, transparent 18px 20px) top left / 100% 47px no-repeat,
+    repeating-linear-gradient(90deg, #555 0 1px, transparent 1px 4px) top left / 100% 28px no-repeat;
 }
 
 .needle {
   position: absolute;
-  left: 104px;
   top: 0;
   width: var(--needle-width);
   height: var(--display-height);
   background: #d40000;
+  transition: left 450ms cubic-bezier(.2, .8, .2, 1);
 }
 
 .radio-display strong {
@@ -78,20 +80,85 @@
 }
 
 .radio-actions button {
+  position: relative;
   width: var(--action-size);
   height: var(--action-size);
-  border: var(--widget-border-thin) solid #111;
+  padding: 0;
+  border: 0;
   border-radius: var(--widget-circle-radius);
   corner-shape: round;
-  background: linear-gradient(#4e4e4e, #292929);
+  background: transparent;
   color: #aaa;
-  box-shadow: inset 0 0 5px #777;
+  box-shadow: 0 2px 4px #111a;
   font-size: 20px;
+}
+
+.radio-actions .button-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  border: var(--widget-border-thin) solid #111;
+  border-radius: inherit;
+  corner-shape: round;
+  background: linear-gradient(#4e4e4e, #292929);
+  box-shadow: inset 0 1px 2px #777;
+  transform: translateY(-1px);
+  transition: transform 100ms ease, box-shadow 100ms ease, filter 100ms ease;
 }
 
 .radio-actions .power {
   margin-left: auto;
+  color: #777;
+  box-shadow: 0 2px 4px #111a;
+  transition: color 300ms ease, box-shadow 300ms ease;
+}
+
+.radio-actions .power .button-face {
+  background: radial-gradient(circle, #454545, #292929);
+}
+
+.radio-actions .power .button-face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: radial-gradient(circle, #387fe3, #0d3268);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.radio-actions .power .button-face i {
+  position: relative;
+}
+
+.radio-widget.is-on .power {
   color: #9cc5ff;
-  font-size: 20px;
+  box-shadow: 0 2px 4px #111a, 0 0 14px #246dd877;
+}
+
+.radio-widget.is-on .power .button-face::before {
+  opacity: 1;
+}
+
+.radio-actions button:active .button-face {
+  filter: brightness(.92);
+  transform: translateY(.5px);
+  box-shadow: inset 0 1px 3px #111;
+}
+
+.radio-actions button:focus-visible {
+  outline: 2px solid #ddd;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .needle,
+  .radio-actions .button-face,
+  .radio-actions .power,
+  .radio-actions .power .button-face::before {
+    transition: none;
+  }
 }

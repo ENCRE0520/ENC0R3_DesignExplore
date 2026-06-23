@@ -6,11 +6,9 @@
   --info-column-width: 52px;
   --info-row-height: 48px;
   --details-row-height: 38px;
-  --wing-width: 225px;
-  --wing-height: 38px;
   --detail-gap: 2px;
 
-  background: linear-gradient(#a9cdf1 0%, #e4f1fb 48%, #efaac6 100%);
+  background: #e6e6e6 url('/flight-background.png') center / 360px 240px no-repeat;
   font-family: Helvetica, Arial, sans-serif;
   
   display: flex;
@@ -21,16 +19,6 @@
 .sky {
   flex: 1;
   position: relative;
-}
-
-.wing {
-  position: absolute;
-  left: calc(var(--widget-padding) * -1 - 24px);
-  top: 64px;
-  width: var(--wing-width);
-  height: var(--wing-height);
-  background: linear-gradient(170deg, #6280b3, #d6e4f3 55%, #d4909d);
-  clip-path: polygon(0 46%, 100% 0, 86% 40%, 22% 100%, 0 80%);
 }
 
 .boarding-card {
