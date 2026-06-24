@@ -151,6 +151,7 @@ body {
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card-size));
+  grid-auto-flow: dense;
   gap: var(--gap);
   justify-content: center;
   max-width: calc(5 * var(--card-size) + 4 * var(--gap));
@@ -625,9 +626,16 @@ body {
   isolation: isolate;
 }
 
+.wide-widget-card {
+  width: calc(2 * var(--card-size) + var(--gap));
+  height: var(--card-size);
+  grid-column: span 2;
+  --widget-preview-width: 252px;
+}
+
 .widget-preview {
   position: relative;
-  width: var(--widget-preview-size);
+  width: var(--widget-preview-width, var(--widget-preview-size));
   height: var(--widget-preview-size);
   flex: 0 0 var(--widget-preview-size);
 }

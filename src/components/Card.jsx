@@ -6,7 +6,8 @@ const EXPAND = '\ue6c6';
 const CLOSE = '\ue6b0';
 
 export default function Card({ data }) {
-  const { Component, props, code, controls = true } = data;
+  const { Component, props, code, controls = true, layout } = data;
+  const isWideWidget = !controls && layout === 'wide';
   const [isSlowMotion, setIsSlowMotion] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasExpanded, setHasExpanded] = useState(false);
@@ -97,7 +98,7 @@ export default function Card({ data }) {
     <div 
       key="original"
       ref={cardRef}
-      className={`design-card ${controls ? '' : 'widget-card'}`.trim()}
+      className={`design-card ${controls ? '' : 'widget-card'} ${isWideWidget ? 'wide-widget-card' : ''}`.trim()}
       style={isExpanded ? fixedStyle : (hasExpanded ? { animation: 'none' } : {})}
     >
       {controls ? component : <div className="widget-preview">{component}</div>}
@@ -126,7 +127,7 @@ export default function Card({ data }) {
     <>
       {/* Placeholder to keep the grid layout intact when the card flies out */}
       {isExpanded && !controls && (
-        <div key="placeholder" className="design-card widget-card" style={{ visibility: 'hidden' }} />
+        <div key="placeholder" className={`design-card widget-card ${isWideWidget ? 'wide-widget-card' : ''}`} style={{ visibility: 'hidden' }} />
       )}
       
       {cardNode}
@@ -143,8 +144,8 @@ export default function Card({ data }) {
             className="widget-modal-close"
             style={{
                position: 'fixed',
-               top: 'calc(50% - 240px + 24px)',
-               right: 'calc(50% - 240px + 24px)',
+               top: `calc(50% - ${expandRect.height}px + 24px)`,
+               right: `calc(50% - ${expandRect.width}px + 24px)`,
                zIndex: 1002,
                opacity: animating && !closing ? 1 : 0,
                transition: 'opacity 0.2s 0.2s',
