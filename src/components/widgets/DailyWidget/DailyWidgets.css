@@ -217,7 +217,7 @@
 }
 
 /* Wide event + todo widget */
-.daily-todo-widget {
+.widget.daily-todo-widget {
   width: 514px;
   height: 240px;
   border-radius: var(--squircle-radius-64);

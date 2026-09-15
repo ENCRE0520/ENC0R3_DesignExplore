@@ -23,7 +23,7 @@
   transform: translate(-50%, -50%);
 }
 
-.nswl-widget {
+.widget.nswl-widget {
   position: absolute;
   top: 0;
   left: 0;
@@ -71,7 +71,7 @@
   transform-origin: top left;
 }
 
-.nswl-widget--compact {
+.widget.nswl-widget--compact {
   width: 240px;
   height: 240px;
 }
