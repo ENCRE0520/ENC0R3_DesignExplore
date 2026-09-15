@@ -5,7 +5,6 @@ import buttonData from './data/buttons';
 import widgetData from './data/widgets';
 import shaderData from './data/shaders';
 import { categories } from './data/taxonomy';
-import './index.css';
 
 const explorations = [...buttonData, ...widgetData, ...shaderData];
 

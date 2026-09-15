@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Afacad:wght@600&family=Chivo+Mono&family=M+PLUS+Code+Latin:wght@600;700&family=Mohave:wght@500;600;700&family=Pixelify+Sans&display=swap');
+@import url('https://at.alicdn.com/t/c/font_5198522_teu784wutyq.css');
+
+.design-explorer-embed {
+  --bg: #ffffff;
+  --card-bg: #f7f7f8;
+  --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --font-mohave: 'Mohave', sans-serif;
+  --font-code: 'M PLUS Code Latin', monospace;
+  --font-chivo: 'Chivo Mono', monospace;
+  --font-pixel: 'Pixelify Sans', monospace;
+  --font-rounded: 'SF Compact Rounded', 'Arial Rounded MT Bold', var(--font-main);
+  --widget-design-size: 240px;
+  --widget-preview-size: 120px;
+  --widget-scale: 0.5;
+  --widget-outer-radius: var(--squircle-radius-64);
+  --widget-circle-radius: 50%;
+  --widget-pill-radius: 999px;
+  --widget-border-thin: 1px;
+  --widget-border-regular: 2px;
+
+  /* Pixel squircle values map to their 1/2 round fallback by default. */
+  --squircle-radius-3: 1.5px;
+  --squircle-radius-6: 3px;
+  --squircle-radius-7: 3.5px;
+  --squircle-radius-12: 6px;
+  --squircle-radius-15: 7.5px;
+  --squircle-radius-18: 9px;
+  --squircle-radius-20: 10px;
+  --squircle-radius-21: 10.5px;
+  --squircle-radius-22: 11px;
+  --squircle-radius-27: 13.5px;
+  --squircle-radius-28: 14px;
+  --squircle-radius-30: 15px;
+  --squircle-radius-32: 16px;
+  --squircle-radius-34: 17px;
+  --squircle-radius-36: 18px;
+  --squircle-radius-40: 20px;
+  --squircle-radius-48: 24px;
+  --squircle-radius-58: 29px;
+  --squircle-radius-64: 32px;
+  --squircle-radius-128: 64px;
+}
+
+@supports (corner-shape: squircle) and (corner-shape: superellipse(1.35)) {
+  .design-explorer-embed {
+    --squircle-radius-3: 3px;
+    --squircle-radius-6: 6px;
+    --squircle-radius-7: 7px;
+    --squircle-radius-12: 12px;
+    --squircle-radius-15: 15px;
+    --squircle-radius-18: 18px;
+    --squircle-radius-20: 20px;
+    --squircle-radius-21: 21px;
+    --squircle-radius-22: 22px;
+    --squircle-radius-27: 27px;
+    --squircle-radius-28: 28px;
+    --squircle-radius-30: 30px;
+    --squircle-radius-32: 32px;
+    --squircle-radius-34: 34px;
+    --squircle-radius-36: 36px;
+    --squircle-radius-40: 40px;
+    --squircle-radius-48: 48px;
+    --squircle-radius-58: 58px;
+    --squircle-radius-64: 64px;
+    --squircle-radius-128: 128px;
+  }
+}
+
+.design-explorer-embed .widget {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--widget-design-size);
+  height: var(--widget-design-size);
+  overflow: hidden;
+  border-radius: var(--widget-outer-radius);
+  corner-shape: squircle;
+  color: #151515;
+  font-family: var(--font-main);
+  font-synthesis: none;
+  transform: translate(-50%, -50%) scale(var(--widget-scale));
+  transform-origin: center;
+}

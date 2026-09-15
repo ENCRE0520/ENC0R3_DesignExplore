@@ -1,6 +1,6 @@
 /* Daily event widgets */
 .daily-event-widget,
-.daily-todo-widget {
+.widget.daily-todo-widget {
   background: #e6e6e6;
   color: #000;
   font-family: var(--font-rounded);

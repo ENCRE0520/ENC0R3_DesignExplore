@@ -1,4 +1,4 @@
-.rwl-widget {
+.widget.rwl-widget {
   --rwl-bezel: #313131;
   width: 514px;
   height: 240px;
@@ -6,6 +6,9 @@
   corner-shape: squircle;
   background: #e6e6e6;
   color: #272727;
+  transform: translate(-50%, -50%) scale(.5);
+  transform-origin: center;
+  font-synthesis: none;
 }
 
 .rwl-widget::before {

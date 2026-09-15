@@ -11,6 +11,14 @@
   background: #000;
   color: #fff;
   font-family: var(--font-mohave);
+  font-synthesis: none;
+}
+
+.speed-widget .distance,
+.speed-widget .speed-dial,
+.speed-widget .rolling-number,
+.speed-widget .digit-item {
+  color: #fff;
 }
 
 .route-arrow {

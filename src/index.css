@@ -50,7 +50,8 @@ svg {
   --widget-design-size: var(--card-size);
   --widget-preview-size: 120px;
   --widget-scale: 0.5;
-  --widget-outer-radius: 64px;
+  /* Use half the squircle radius when corner-shape is unavailable. */
+  --widget-outer-radius: var(--squircle-radius-64);
   --widget-circle-radius: 50%;
   --widget-pill-radius: 999px;
   --widget-radius-sm: 10px;
@@ -81,6 +82,7 @@ svg {
   --squircle-radius-34: 17px;
   --squircle-radius-36: 18px;
   --squircle-radius-40: 20px;
+  --squircle-radius-48: 24px;
   --squircle-radius-58: 29px;
   --squircle-radius-64: 32px;
   --squircle-radius-128: 64px;
@@ -105,6 +107,7 @@ svg {
     --squircle-radius-34: 34px;
     --squircle-radius-36: 36px;
     --squircle-radius-40: 40px;
+    --squircle-radius-48: 48px;
     --squircle-radius-58: 58px;
     --squircle-radius-64: 64px;
     --squircle-radius-128: 128px;
@@ -115,12 +118,18 @@ html {
   font-family: var(--font-main);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 button {
@@ -129,6 +138,7 @@ button {
 
 #root {
   min-height: 100vh;
+  min-height: 100svh;
 }
 
 /* ═══════════════════════════════
@@ -137,6 +147,7 @@ button {
 
 .app {
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--gap);
@@ -179,9 +190,10 @@ button {
 .tab-nav {
   width: max-content;
   position: fixed;
-  top: calc(var(--gap) + 48px);
+  top: 50%;
   left: calc(var(--gap) + 48px);
   z-index: 20;
+  transform: translateY(-50%);
 }
 
 .tab-list {
@@ -233,7 +245,7 @@ button {
 .content {
   grid-column: 2 / -1;
   min-width: 0;
-  padding-bottom: var(--gap);
+  padding-bottom: max(var(--gap), env(safe-area-inset-bottom));
 }
 
 /* ── Card Grid ── */
@@ -366,15 +378,28 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.design-card--shader .slow-motion-toggle:hover {
-  background: rgba(0, 0, 0, 0.38);
-  color: #ffffff;
-}
-
 .design-card--shader .slow-motion-toggle.active {
   color: #ffffff;
   background: rgba(108, 71, 255, 0.5);
   border-color: rgba(108, 71, 255, 0.6);
+}
+
+/* Filter effects are optional. A more opaque authored surface preserves the
+   glass hierarchy when an older browser ignores backdrop-filter entirely. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nsw-liquid-fallback-control,
+  .weather-widget-glass-fallback {
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 42%), rgb(255 255 255 / 18%) 48%, rgb(255 255 255 / 30%)),
+      rgb(255 255 255 / 30%);
+  }
+
+  .nsw-liquid-fallback-control {
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 58%),
+      inset 0 -1px 2px rgb(255 255 255 / 20%),
+      0 2px 8px rgb(0 0 0 / 10%);
+  }
 }
 
 /* Card entrance stagger */
@@ -495,11 +520,6 @@ button {
   transition: opacity 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out;
 }
 
-.slow-motion-toggle:hover {
-  background: #DDDDDD;
-  color: #000;
-}
-
 .slow-motion-toggle:active {
   background: #cccccc;
   color: #000;
@@ -508,10 +528,6 @@ button {
 .slow-motion-toggle.active {
   color: #6c47ff;
   background: rgba(108, 71, 255, 0.1);
-}
-
-.slow-motion-toggle.active:hover {
-  background: rgba(108, 71, 255, 0.15);
 }
 
 /* ── Code Icon Trigger ── */
@@ -530,11 +546,6 @@ button {
   corner-shape: squircle;
   color: #999;
   transition: background 0.15s, color 0.15s;
-}
-
-.code-icon-trigger:hover {
-  background: #DDDDDD;
-  color: #000;
 }
 
 .code-icon-trigger:active {
@@ -561,11 +572,6 @@ button {
   color: #999;
   font-size: var(--card-control-icon-size);
   transition: opacity 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out;
-}
-
-.widget-expand-trigger:hover {
-  background: #DDDDDD;
-  color: #000;
 }
 
 .widget-expand-trigger:active {
@@ -784,12 +790,13 @@ button {
 .widget-modal-content .expanded-card {
   width: calc(var(--card-size) * 2);
   height: calc(var(--card-size) * 2);
-  border-radius: 48px;
+  border-radius: var(--squircle-radius-48);
+  corner-shape: squircle;
   --widget-preview-size: 240px;
   --widget-scale: 1;
   margin: 0;
   /* FLIP animation will drive the transform and border-radius inline */
-  will-change: transform, border-radius, background-color;
+  will-change: transform;
   animation: none !important;
 }
 
@@ -803,8 +810,8 @@ button {
   position: absolute;
   top: 24px;
   right: 24px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background: rgba(0, 0, 0, 0.05);
   border: none;
   border-radius: 50%;
@@ -813,17 +820,21 @@ button {
   justify-content: center;
   cursor: pointer;
   color: #666;
-  transition: all 0.2s;
+  transition: background-color 150ms ease-out, color 150ms ease-out, transform 120ms ease-out;
   z-index: 1010;
 }
 
-.widget-modal-close:hover {
-  background: rgba(0, 0, 0, 0.1);
-  color: #000;
+.widget-modal-close:active {
+  transform: scale(0.96);
 }
 
-.widget-modal-close:active {
-  transform: scale(0.95);
+.widget-modal-close:focus-visible,
+.code-close:focus-visible,
+.code-icon-trigger:focus-visible,
+.slow-motion-toggle:focus-visible,
+.widget-expand-trigger:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
 }
 
 /* Removed popIn animation */
@@ -869,11 +880,33 @@ button {
   line-height: 1;
 }
 
-.code-close:hover {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .design-card--shader .slow-motion-toggle:hover,
+  .slow-motion-toggle:hover,
+  .code-icon-trigger:hover,
+  .widget-expand-trigger:hover {
+    background: #DDDDDD;
+    color: #000;
+  }
+
+  .design-card--shader .slow-motion-toggle:hover {
+    background: rgba(0, 0, 0, 0.38);
+    color: #ffffff;
+  }
+
+  .slow-motion-toggle.active:hover {
+    background: rgba(108, 71, 255, 0.15);
+  }
+
+  .widget-modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+  }
+
+  .code-close:hover {
+    color: #fff;
+  }
 }
-
-
 
 @keyframes fadeIn {
   from {
@@ -891,10 +924,13 @@ button {
    Responsive
    ═══════════════════════════════ */
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .app {
     grid-template-columns: 1fr;
-    padding: var(--gap);
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-right: max(var(--gap), env(safe-area-inset-right));
+    padding-bottom: max(var(--gap), env(safe-area-inset-bottom));
+    padding-left: max(var(--gap), env(safe-area-inset-left));
   }
 
   .sidebar,
@@ -903,16 +939,33 @@ button {
   }
 
   .sidebar {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 8px;
     min-height: auto;
-    padding: 8px 0 12px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 4px 0 10px;
+    background: var(--bg);
+    isolation: isolate;
   }
 
   .tab-nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
     position: static;
     width: 100%;
-    margin-top: 16px;
+    margin-top: 8px;
+    margin-right: calc(-1 * max(var(--gap), env(safe-area-inset-right)));
+    margin-left: calc(-1 * max(var(--gap), env(safe-area-inset-left)));
+    padding: 0 max(var(--gap), env(safe-area-inset-left)) 2px;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: max(var(--gap), env(safe-area-inset-left));
     scrollbar-width: none;
+    transform: none;
   }
 
   .tab-nav::-webkit-scrollbar {
@@ -922,36 +975,45 @@ button {
   .tab-list {
     width: max-content;
     flex-direction: row;
-    gap: 8px;
+    gap: 4px;
+    margin-inline: 0;
+    padding-inline: 2px max(var(--gap), env(safe-area-inset-right));
   }
 
   .tab-item {
     flex: 0 0 auto;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: var(--squircle-radius-12);
     font-size: 14px;
+  }
+
+  .tab-item.active {
+    background: var(--surface-subtle);
   }
 
   .title {
     position: static;
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    min-height: 44px;
+    align-items: center;
     font-size: 16px;
   }
 
   .content {
-    padding-bottom: 0;
+    padding-bottom: max(var(--gap), env(safe-area-inset-bottom));
   }
 
   .card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 
   .empty-state {
     min-height: 360px;
     padding: 32px 0;
-  }
-}
-
-@media (max-width: 420px) {
-  .card-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -980,6 +1042,7 @@ button {
   corner-shape: squircle;
   color: #151515;
   font-family: var(--font-main);
+  font-synthesis: none;
   transform: translate(-50%, -50%) scale(var(--widget-scale));
   transform-origin: center;
 }

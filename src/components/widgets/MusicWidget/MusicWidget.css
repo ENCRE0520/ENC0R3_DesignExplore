@@ -1,5 +1,5 @@
 /* Music */
-.music-widget {
+.widget.music-widget {
   --side-control-width: 58.5px;
   --primary-control-size: 76.5px;
   --control-height: 76.5px;
@@ -15,8 +15,10 @@
   --mw-note-text: #2b0059;
 
   background: var(--mw-bg);
-  border-radius: var(--widget-pill-radius);
+  border-radius: 50%;
   corner-shape: round;
+  aspect-ratio: 1;
+  overflow: hidden;
   text-align: center;
   color: var(--mw-text);
   font-family: var(--font-rounded);

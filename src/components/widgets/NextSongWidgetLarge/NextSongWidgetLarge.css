@@ -15,6 +15,14 @@
   height: 240px;
 }
 
+/* The card zooms the authored frame when expanded. Keep the frame at the
+   preview footprint so the inner 0.5 scale resolves to one centered widget. */
+.nswl-scale-frame--expanded:not(.nswl-scale-frame--compact) {
+  width: 257px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+}
+
 .nswl-widget {
   position: absolute;
   top: 0;
@@ -24,6 +32,17 @@
   overflow: hidden;
   border-radius: var(--squircle-radius-64);
   corner-shape: squircle;
+  /* Keep a plain sRGB gradient for browsers without color-space interpolation. */
+  background: linear-gradient(
+    180deg,
+    #00020e 0%,
+    #020710 18%,
+    #0d2146 30%,
+    #2d5290 48%,
+    #5980bd 67%,
+    #98b3dc 89%,
+    #b7cceb 100%
+  );
   background: linear-gradient(
     180deg in oklab,
     #00020e 0%,
@@ -59,14 +78,30 @@
 
 .nswl-visual,
 .nsw-liquid-overlay {
+  --nsw-liquid-canvas-width: 514px;
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
+.nsw-liquid-overlay--compact {
+  --nsw-liquid-canvas-width: 240px;
+}
+
 .nswl-visual {
   overflow: hidden;
+  /* Keep a plain sRGB gradient for browsers without color-space interpolation. */
+  background: linear-gradient(
+    180deg,
+    #00020e 0%,
+    #020710 18%,
+    #0d2146 30%,
+    #2d5290 48%,
+    #5980bd 67%,
+    #98b3dc 89%,
+    #b7cceb 100%
+  );
   background: linear-gradient(
     180deg in oklab,
     #00020e 0%,
@@ -198,7 +233,6 @@
   transition:
     background-color 700ms cubic-bezier(.33, 0, .25, 1),
     box-shadow 700ms cubic-bezier(.33, 0, .25, 1);
-  will-change: background-color, box-shadow;
 }
 
 .nswl-lyrics-progress-dot--active {
@@ -253,6 +287,8 @@
 }
 
 .nswl-lyrics-line {
+  margin: 0;
+  padding: 0;
   color: rgba(255, 255, 255, .46);
   opacity: 1;
   text-shadow: none;
@@ -640,7 +676,7 @@
 }
 
 .nsw-liquid-overlay--preview .nsw-liquid-fallback {
-  width: 240px;
+  width: var(--nsw-liquid-canvas-width);
   height: 240px;
   transform: scale(.5);
   transform-origin: top left;

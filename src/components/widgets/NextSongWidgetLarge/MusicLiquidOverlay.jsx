@@ -156,7 +156,7 @@ export default function MusicLiquidOverlay({
 
   return (
     <div
-      className={`nsw-liquid-overlay${showFallback ? ' nsw-liquid-overlay--fallback' : ''}${!isExpanded ? ' nsw-liquid-overlay--preview' : ''}`}
+      className={`nsw-liquid-overlay${compact ? ' nsw-liquid-overlay--compact' : ' nsw-liquid-overlay--wide'}${showFallback ? ' nsw-liquid-overlay--fallback' : ''}${!isExpanded ? ' nsw-liquid-overlay--preview' : ''}`}
       style={{
         width: outputWidth,
         height: outputHeight,

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-.nscd-widget {
+.widget.nscd-widget:not(.nscd-widget--compact) {
   width: 514px;
   height: 240px;
   border-radius: var(--squircle-radius-64);
@@ -9,7 +9,7 @@
   transform: translate(-50%, -50%) scale(.4902723735);
 }
 
-.nscd-widget--compact {
+.widget.nscd-widget--compact {
   width: 240px;
   height: 240px;
   transform: translate(-50%, -50%) scale(.5);

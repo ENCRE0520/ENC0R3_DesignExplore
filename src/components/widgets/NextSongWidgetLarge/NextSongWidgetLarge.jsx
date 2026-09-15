@@ -996,7 +996,7 @@ export default function NextSongWidgetLarge({
   );
 
   return (
-    <div className={`nswl-scale-frame${compact ? ' nswl-scale-frame--compact' : ' nswl-scale-frame--wide'}`}>
+    <div className={`nswl-scale-frame${compact ? ' nswl-scale-frame--compact' : ' nswl-scale-frame--wide'}${isExpanded ? ' nswl-scale-frame--expanded' : ''}`}>
       <div className={`widget nswl-widget${compact ? ' nswl-widget--compact' : ''}${isPlaying ? ' nswl-widget--playing' : ''}`}>
         {compact ? null : (
           <MusicVisual

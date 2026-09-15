@@ -2,6 +2,7 @@
   background: linear-gradient(#750e21, #400007);
   color: #fff;
   font-family: var(--font-main);
+  font-synthesis: none;
 }
 
 .formula-one-car {
@@ -37,6 +38,7 @@
   font-size: 12px;
   line-height: 1;
   white-space: nowrap;
+  color: #fff;
 }
 
 .formula-one-number {
@@ -53,6 +55,7 @@
 .formula-one-driver-name strong,
 .formula-one-points {
   font-weight: 800;
+  color: #fff;
 }
 
 .formula-one-points {
