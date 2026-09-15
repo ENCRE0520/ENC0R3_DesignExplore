@@ -31,7 +31,7 @@ import styles from './LiquidGlassButton.module.css';
 const BUTTON_WIDTH = 156;
 const BUTTON_HEIGHT = 48;
 const SUPPORTS_CORNER_SHAPE = checkCornerShapeSupport();
-const BUTTON_CORNER_RADIUS = 20 * (SUPPORTS_CORNER_SHAPE ? 1 : 2 / 3);
+const BUTTON_CORNER_RADIUS = 20 * (SUPPORTS_CORNER_SHAPE ? 1 : 1 / 2);
 // CSS superellipse(1.35) resolves to an exponent of 2^1.35. Liquid DOM
 // expresses that same exponent on a 0–0.6 smoothing scale.
 const BUTTON_CORNER_SMOOTHING = SUPPORTS_CORNER_SHAPE ? 0.165 : 0;

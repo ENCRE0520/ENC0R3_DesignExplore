@@ -58,28 +58,32 @@ svg {
   --widget-radius-lg: 20px;
   --widget-border-thin: 1px;
   --widget-border-regular: 2px;
+  --card-control-size: 36px;
+  --card-control-icon-size: 16px;
+  --card-control-radius: var(--squircle-radius-12);
+  --card-warning-line-height: 16.2px;
 
-  /* Pixel squircle values map to their 2/3 round fallback by default. */
-  --squircle-radius-3: 2px;
-  --squircle-radius-6: 4px;
-  --squircle-radius-7: 4.666667px;
-  --squircle-radius-12: 8px;
-  --squircle-radius-15: 10px;
-  --squircle-radius-16: 10.666667px;
-  --squircle-radius-18: 12px;
-  --squircle-radius-20: 13.333333px;
-  --squircle-radius-21: 14px;
-  --squircle-radius-22: 14.666667px;
-  --squircle-radius-27: 18px;
-  --squircle-radius-28: 18.666667px;
-  --squircle-radius-30: 20px;
-  --squircle-radius-32: 21.333333px;
-  --squircle-radius-34: 22.666667px;
-  --squircle-radius-36: 24px;
-  --squircle-radius-40: 26.666667px;
-  --squircle-radius-58: 38.666667px;
-  --squircle-radius-64: 42.666667px;
-  --squircle-radius-128: 85.333333px;
+  /* Pixel squircle values map to their 1/2 round fallback by default. */
+  --squircle-radius-3: 1.5px;
+  --squircle-radius-6: 3px;
+  --squircle-radius-7: 3.5px;
+  --squircle-radius-12: 6px;
+  --squircle-radius-15: 7.5px;
+  --squircle-radius-16: 8px;
+  --squircle-radius-18: 9px;
+  --squircle-radius-20: 10px;
+  --squircle-radius-21: 10.5px;
+  --squircle-radius-22: 11px;
+  --squircle-radius-27: 13.5px;
+  --squircle-radius-28: 14px;
+  --squircle-radius-30: 15px;
+  --squircle-radius-32: 16px;
+  --squircle-radius-34: 17px;
+  --squircle-radius-36: 18px;
+  --squircle-radius-40: 20px;
+  --squircle-radius-58: 29px;
+  --squircle-radius-64: 32px;
+  --squircle-radius-128: 64px;
 }
 
 @supports (corner-shape: squircle) and (corner-shape: superellipse(1.35)) {
@@ -471,8 +475,8 @@ button {
   position: absolute;
   bottom: 8px;
   left: 8px;
-  width: 36px;
-  height: 36px;
+  width: var(--card-control-size);
+  height: var(--card-control-size);
   background: transparent;
   display: flex;
   align-items: center;
@@ -480,7 +484,7 @@ button {
   cursor: pointer;
   border: none;
   z-index: 10;
-  border-radius: var(--squircle-radius-12);
+  border-radius: var(--card-control-radius);
   corner-shape: squircle;
   color: #999;
   font-family: var(--font-mono);
@@ -513,8 +517,8 @@ button {
 /* ── Code Icon Trigger ── */
 .code-icon-trigger {
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: var(--card-control-size);
+  height: var(--card-control-size);
   background: transparent;
   display: flex;
   align-items: center;
@@ -522,7 +526,7 @@ button {
   cursor: pointer;
   border: none;
   z-index: 10;
-  border-radius: var(--squircle-radius-12);
+  border-radius: var(--card-control-radius);
   corner-shape: squircle;
   color: #999;
   transition: background 0.15s, color 0.15s;
@@ -543,8 +547,8 @@ button {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  width: 36px;
-  height: 36px;
+  width: var(--card-control-size);
+  height: var(--card-control-size);
   background: transparent;
   display: flex;
   align-items: center;
@@ -552,9 +556,10 @@ button {
   cursor: pointer;
   border: none;
   z-index: 10;
-  border-radius: var(--squircle-radius-12);
+  border-radius: var(--card-control-radius);
   corner-shape: squircle;
   color: #999;
+  font-size: var(--card-control-icon-size);
   transition: opacity 0.15s ease-out, background-color 0.15s ease-out, color 0.15s ease-out;
 }
 
@@ -573,10 +578,11 @@ button {
   position: absolute;
   top: 8px;
   left: 8px;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
+  right: 8px;
+  width: auto;
+  height: var(--card-control-size);
+  min-width: var(--card-control-size);
+  min-height: var(--card-control-size);
   box-sizing: border-box;
   background: transparent;
   display: flex;
@@ -585,7 +591,8 @@ button {
   cursor: pointer;
   border: none;
   z-index: 25;
-  border-radius: 50%;
+  border-radius: var(--card-control-radius);
+  corner-shape: squircle;
   color: #dc2626;
   padding: 0;
   text-align: left;
@@ -594,8 +601,12 @@ button {
   user-select: none;
   touch-action: manipulation;
   box-shadow: none;
+  clip-path: inset(
+    0 calc(100% - var(--card-control-size)) 0 0
+    round var(--card-control-radius)
+  );
   transition:
-    width 0.16s ease-out,
+    clip-path 0.16s ease-out,
     background-color 0.15s ease-out,
     box-shadow 0.2s ease-out,
     color 0.15s ease-out,
@@ -603,9 +614,9 @@ button {
 }
 
 .card-compatibility-warning .card-warning-icon-wrapper {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
+  width: var(--card-control-size);
+  height: var(--card-control-size);
+  min-width: var(--card-control-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -616,21 +627,29 @@ button {
 
 .card-compatibility-warning .card-warning-icon {
   display: block;
+  width: var(--card-control-icon-size);
+  height: var(--card-control-icon-size);
 }
 
 .card-compatibility-warning .card-warning-text {
+  width: calc(100% - var(--card-control-size));
   min-width: 0;
   flex: 1 1 auto;
+  box-sizing: border-box;
   font-family: var(--font-main);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.2px;
   color: inherit;
-  padding: 8px 12px 8px 0;
+  padding:
+    calc((var(--card-control-size) - var(--card-warning-line-height)) / 2)
+    12px
+    calc((var(--card-control-size) - var(--card-warning-line-height)) / 2)
+    0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  line-height: 1.35;
+  line-height: var(--card-warning-line-height);
   white-space: normal;
   transition:
     opacity 0.1s ease-in,
@@ -639,13 +658,14 @@ button {
 
 .card-compatibility-warning:focus-visible,
 .card-compatibility-warning.is-active {
-  width: min(320px, calc(100% - 16px));
   height: auto;
-  border-radius: 20px;
+  border-radius: var(--card-control-radius);
+  corner-shape: squircle;
   background: #DDDDDD;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  clip-path: inset(0 round var(--card-control-radius));
   transition:
-    width 0.22s cubic-bezier(0.32, 0.72, 0, 1),
+    clip-path 0.22s cubic-bezier(0.32, 0.72, 0, 1),
     background-color 0.15s ease-out,
     box-shadow 0.2s ease-out,
     color 0.15s ease-out,
@@ -664,13 +684,14 @@ button {
 
 @media (hover: hover) and (pointer: fine) {
   .card-compatibility-warning:hover {
-    width: min(320px, calc(100% - 16px));
     height: auto;
-    border-radius: 20px;
+    border-radius: var(--card-control-radius);
+    corner-shape: squircle;
     background: #DDDDDD;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    clip-path: inset(0 round var(--card-control-radius));
     transition:
-      width 0.22s cubic-bezier(0.32, 0.72, 0, 1),
+      clip-path 0.22s cubic-bezier(0.32, 0.72, 0, 1),
       background-color 0.15s ease-out,
       box-shadow 0.2s ease-out,
       color 0.15s ease-out,
@@ -697,12 +718,10 @@ button {
 }
 
 @media (pointer: coarse) {
-  .card-compatibility-warning,
-  .card-compatibility-warning .card-warning-icon-wrapper {
-    width: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    height: 44px;
+  .slow-motion-toggle,
+  .widget-expand-trigger,
+  .card-compatibility-warning {
+    --card-control-size: 44px;
   }
 
   .card-compatibility-warning.is-active {

@@ -15,7 +15,7 @@ import {
 const GLASS_SIZE = 212;
 const GLASS_RADIUS = 27;
 const SUPPORTS_CORNER_SHAPE = checkCornerShapeSupport();
-const GLASS_CORNER_RADIUS = GLASS_RADIUS * (SUPPORTS_CORNER_SHAPE ? 1 : 2 / 3);
+const GLASS_CORNER_RADIUS = GLASS_RADIUS * (SUPPORTS_CORNER_SHAPE ? 1 : 1 / 2);
 const GLASS_CORNER_SMOOTHING = SUPPORTS_CORNER_SHAPE ? 0.6 : 0;
 
 const WeatherGlassOverlay = forwardRef(function WeatherGlassOverlay(

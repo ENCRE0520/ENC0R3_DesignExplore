@@ -73,7 +73,7 @@ const buttonData = [
 .button {
   width: 156px;
   height: 48px;
-  border-radius: 13.333px;
+  border-radius: 10px;
   corner-shape: superellipse(1.35);
   padding: 6px;
 }
@@ -105,7 +105,7 @@ const supportsCornerShape = CSS.supports('corner-shape: squircle')
   <ControlGlass
     width={156}
     height={48}
-    cornerRadius={20 * (supportsCornerShape ? 1 : 2 / 3)}
+    cornerRadius={20 * (supportsCornerShape ? 1 : 1 / 2)}
     cornerSmoothing={supportsCornerShape ? 0.165 : 0}
     pressScale={pressed ? pressScale : 1}
     dragTransform={pressDrag}
@@ -115,7 +115,7 @@ const supportsCornerShape = CSS.supports('corner-shape: squircle')
 .button {
   width: 156px;
   height: 48px;
-  border-radius: 13.333px;
+  border-radius: 10px;
   corner-shape: superellipse(1.35);
   background: transparent;
   touch-action: none;
