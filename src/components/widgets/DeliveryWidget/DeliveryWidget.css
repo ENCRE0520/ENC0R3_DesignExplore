@@ -3,7 +3,6 @@
   --copy-inset: 28px;
   --copy-width: 184px;
   --copy-height: 76px;
-  --illustration-stroke: var(--widget-border-regular);
   background: #fff;
   font-family: var(--font-code);
 }
@@ -39,69 +38,12 @@
   font: 600 20px/20px var(--font-code);
 }
 
-.conveyor {
+.delivery-illustration {
   position: absolute;
-  left: -13px;
-  top: 161px;
-  width: 280px;
-  height: 70px;
-  border: var(--illustration-stroke) solid #111;
-  transform: rotate(-22deg);
-  background: #fff;
-  display: flex;
-}
-
-.conveyor i {
-  flex: 1;
-  border-right: var(--illustration-stroke) solid #111;
-}
-
-.parcel {
-  position: absolute;
-  left: 84px;
-  top: 127px;
-  width: 73px;
-  height: 57px;
-  background: #fff;
-  border: var(--illustration-stroke) solid #111;
-}
-
-.parcel::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: -17px;
-  width: 49px;
-  height: 23px;
-  background: #fff;
-  border: var(--illustration-stroke) solid #111;
-  transform: skewY(24deg);
-}
-
-.parcel::after {
-  content: '';
-  position: absolute;
-  right: -19px;
-  top: -10px;
-  width: 19px;
-  height: 57px;
-  background: white;
-  border: var(--illustration-stroke) solid #111;
-  transform: skewY(-27deg);
-}
-
-.parcel span {
-  position: absolute;
-  left: 31px;
-  height: 55px;
-  border-left: var(--illustration-stroke) solid #111;
-}
-
-.parcel b {
-  position: absolute;
-  left: 15px;
-  bottom: 5px;
-  width: 14px;
-  height: 17px;
-  border: var(--illustration-stroke) solid #111;
+  left: -29px;
+  top: 75px;
+  width: 309px;
+  height: 188px;
+  max-width: none;
+  pointer-events: none;
 }

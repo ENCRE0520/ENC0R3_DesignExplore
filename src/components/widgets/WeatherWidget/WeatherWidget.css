@@ -1,0 +1,183 @@
+.weather-widget {
+  --weather-parallax-x: 0px;
+  --weather-parallax-y: 0px;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid #e1e1e1;
+  border-radius: var(--squircle-radius-64);
+  corner-shape: squircle;
+  background: #f3f3f3;
+  font-family: var(--font-rounded);
+}
+
+.weather-widget-face {
+  position: relative;
+  width: 212px;
+  height: 212px;
+  overflow: hidden;
+  border-radius: var(--squircle-radius-27);
+  corner-shape: squircle;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, .08),
+    0 4px 8px rgba(0, 0, 0, .08),
+    0 0 12px rgba(0, 0, 0, .15);
+  isolation: isolate;
+}
+
+.weather-widget-face::after {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  border: 4px solid #cdcdcd;
+  border-radius: inherit;
+  corner-shape: squircle;
+  content: '';
+  pointer-events: none;
+}
+
+.weather-widget-background,
+.weather-widget-liquid,
+.weather-widget-glass-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.weather-widget-background {
+  z-index: 0;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transform: translate3d(var(--weather-parallax-x), var(--weather-parallax-y), 0) scale(1.5);
+  transform-origin: center;
+}
+
+.weather-widget[data-parallax-active] .weather-widget-background {
+  will-change: transform;
+}
+
+.weather-widget-reading {
+  position: absolute;
+  z-index: 1;
+  left: 16px;
+  bottom: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, .4);
+  pointer-events: none;
+}
+
+.weather-widget-sunset {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.weather-widget-sunset-icon {
+  display: block;
+  width: 23px;
+  height: 23px;
+  flex: 0 0 23px;
+  object-fit: contain;
+}
+
+.weather-widget-reading strong {
+  font-size: 96px;
+  font-weight: 700;
+  line-height: .92;
+  letter-spacing: -4px;
+  white-space: nowrap;
+}
+
+.weather-widget-face--details {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.weather-details-reading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.weather-details-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.weather-details-primary {
+  text-shadow: 0 0 6px rgba(255, 255, 255, .4);
+}
+
+.weather-details-muted {
+  color: rgba(255, 255, 255, .6);
+}
+
+.weather-widget-glass-fallback {
+  z-index: 2;
+  border-radius: var(--squircle-radius-27);
+  corner-shape: squircle;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .18), transparent 32%),
+    rgba(255, 255, 255, .1);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, .55),
+    inset -1px -1px 0 rgba(255, 255, 255, .14),
+    inset 8px 8px 18px rgba(255, 255, 255, .08),
+    inset -10px -10px 20px rgba(0, 0, 0, .05);
+  backdrop-filter: blur(.6px) saturate(1.08);
+  -webkit-backdrop-filter: blur(.6px) saturate(1.08);
+  pointer-events: none;
+}
+
+.weather-widget-liquid {
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.weather-widget-liquid--ready {
+  opacity: 1;
+}
+
+.weather-widget-liquid-source {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--squircle-radius-27);
+  corner-shape: squircle;
+}
+
+.weather-widget-liquid-source--details {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.weather-widget-liquid-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

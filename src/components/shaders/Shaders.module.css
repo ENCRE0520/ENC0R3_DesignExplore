@@ -1,0 +1,337 @@
+/* ═══════════════════════════════════════════
+   Shaders — Dynamic Fluid & Gradient Cards
+   ═══════════════════════════════════════════ */
+
+.shaderRoot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  corner-shape: inherit;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+/* ───────────────────────────────────────────
+   1. Dynamic Gradient Field Shader
+   ─────────────────────────────────────────── */
+.dynamicRoot {
+  background: #adbeff;
+}
+
+.dynamicGradientField,
+.dynamicCoreField,
+.dynamicRipple {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.dynamicGradientField {
+  top: -58%;
+  right: -42%;
+  bottom: -58%;
+  left: -42%;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 50% 66%,
+      #6048f4 0 14%,
+      #735fff 28%,
+      rgb(121 105 250 / 86%) 44%,
+      rgb(171 181 255 / 72%) 61%,
+      transparent 78%
+    ),
+    radial-gradient(
+      circle at 72% 34%,
+      rgb(193 208 255 / 80%) 0 12%,
+      transparent 48%
+    );
+  -webkit-mask-image: radial-gradient(
+    ellipse 58% 58% at center,
+    #000 0 68%,
+    rgb(0 0 0 / 92%) 80%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 58% 58% at center,
+    #000 0 68%,
+    rgb(0 0 0 / 92%) 80%,
+    transparent 100%
+  );
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  filter: blur(7.2px);
+  opacity: 0.98;
+  transform: translate3d(-6%, 10%, 0) rotate(-7deg) scale(0.84);
+  animation: dynamic-gradient-flow calc(11000ms * var(--motion-scale, 1)) cubic-bezier(0.37, 0.05, 0.63, 0.95) calc(-2200ms * var(--motion-scale, 1)) infinite;
+  will-change: transform;
+}
+
+.dynamicCoreField {
+  top: 78%;
+  left: 50%;
+  width: 52%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 45% 42%,
+    #f1f5ff 0 16%,
+    #d4e2ff 38%,
+    rgb(180 199 255 / 76%) 63%,
+    transparent 100%
+  );
+  filter: blur(4.8px);
+  opacity: 0.98;
+  transform: translate(-50%, -50%) translate3d(-4%, 2%, 0);
+  animation: dynamic-core-flow calc(7600ms * var(--motion-scale, 1)) cubic-bezier(0.37, 0.05, 0.63, 0.95) calc(-4300ms * var(--motion-scale, 1)) infinite;
+  will-change: transform;
+}
+
+.dynamicRipple {
+  top: 78%;
+  left: 50%;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    transparent 0 42%,
+    rgb(82 53 255 / 84%) 50%,
+    rgb(127 105 255 / 62%) 58%,
+    rgb(188 199 255 / 26%) 70%,
+    transparent 82%
+  );
+  filter: blur(3.2px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.08);
+  animation: dynamic-ripple-out calc(4600ms * var(--motion-scale, 1)) linear calc(-900ms * var(--motion-scale, 1)) infinite;
+  will-change: transform, opacity;
+}
+
+.dynamicRippleSecondary {
+  width: 128%;
+  background: radial-gradient(
+    circle,
+    transparent 0 50%,
+    rgb(104 76 255 / 68%) 58%,
+    rgb(156 143 255 / 46%) 66%,
+    rgb(199 211 255 / 20%) 77%,
+    transparent 88%
+  );
+  filter: blur(4.8px);
+  animation-duration: calc(6200ms * var(--motion-scale, 1));
+  animation-delay: calc(-3300ms * var(--motion-scale, 1));
+}
+
+@keyframes dynamic-gradient-flow {
+  0% {
+    transform: translate3d(-6%, 10%, 0) rotate(-7deg) scale(0.84);
+  }
+  18% {
+    transform: translate3d(6%, -5%, 0) rotate(-2deg) scale(0.95);
+  }
+  37% {
+    transform: translate3d(14%, 4%, 0) rotate(5deg) scale(1.03);
+  }
+  55% {
+    transform: translate3d(2%, 12%, 0) rotate(1deg) scale(1.1);
+  }
+  76% {
+    transform: translate3d(-11%, -2%, 0) rotate(-5deg) scale(0.98);
+  }
+  100% {
+    transform: translate3d(-6%, 10%, 0) rotate(-7deg) scale(0.84);
+  }
+}
+
+@keyframes dynamic-core-flow {
+  0% {
+    transform: translate(-50%, -50%) translate3d(-4%, 2%, 0);
+  }
+  22% {
+    transform: translate(-50%, -50%) translate3d(8%, -7%, 0);
+  }
+  47% {
+    transform: translate(-50%, -50%) translate3d(14%, 4%, 0);
+  }
+  71% {
+    transform: translate(-50%, -50%) translate3d(-9%, 9%, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate3d(-4%, 2%, 0);
+  }
+}
+
+@keyframes dynamic-ripple-out {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.08);
+  }
+  9% {
+    opacity: 0.9;
+  }
+  52% {
+    opacity: 0.66;
+    transform: translate(-50%, -50%) scale(0.82);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.82);
+  }
+}
+
+/* ───────────────────────────────────────────
+   2. Relationship Gradient Flow Shader
+   ─────────────────────────────────────────── */
+.relationshipRoot {
+  background: #5d78d7;
+}
+
+.relationshipGradientFlow {
+  position: absolute;
+  top: -45%;
+  right: -10%;
+  bottom: -45%;
+  left: -10%;
+  display: block;
+  background: linear-gradient(
+    180deg,
+    #160052 0%,
+    #211178 17%,
+    #3457c6 42%,
+    #8bb2fa 70%,
+    #cfe0ff 100%
+  );
+  filter: blur(2px);
+  opacity: 1;
+  pointer-events: none;
+  transform: translate3d(0, -18%, 0);
+  animation: relationship-gradient-flow calc(6800ms * var(--motion-scale, 1)) linear calc(-1700ms * var(--motion-scale, 1)) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes relationship-gradient-flow {
+  0% {
+    transform: translate3d(0, -18%, 0);
+  }
+  100% {
+    transform: translate3d(0, 18%, 0);
+  }
+}
+
+/* ───────────────────────────────────────────
+   3. Focus Aurora Shader
+   ─────────────────────────────────────────── */
+.focusRoot {
+  background: linear-gradient(135deg, #7f9fff 0%, #9eaaf2 48%, #d7d4e6 100%);
+}
+
+.focusArtwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  corner-shape: inherit;
+  isolation: isolate;
+}
+
+.focusArtwork::before {
+  position: absolute;
+  top: -12%;
+  right: -30%;
+  bottom: -50%;
+  left: -72%;
+  border-radius: 52% 48% 44% 56% / 34% 46% 54% 66%;
+  background: linear-gradient(145deg, #f0edf1 0%, #e2dce7 54%, #cbc3d4 100%);
+  content: '';
+  opacity: 0.96;
+  filter: blur(7.2px);
+  pointer-events: none;
+  transform: rotate(10deg) translate3d(-10%, 4%, 0);
+  transform-origin: 50% 50%;
+  animation: focus-curve-flow calc(14500ms * var(--motion-scale, 1)) linear calc(-3200ms * var(--motion-scale, 1)) infinite;
+  will-change: transform;
+}
+
+.focusArtwork::after {
+  position: absolute;
+  top: -12%;
+  right: -34%;
+  bottom: -30%;
+  left: -58%;
+  border-radius: 56% 44% 64% 36% / 40% 54% 46% 60%;
+  background: radial-gradient(
+    ellipse at 34% 26%,
+    rgb(126 153 255 / 58%) 0%,
+    rgb(170 177 239 / 38%) 38%,
+    rgb(220 214 235 / 18%) 59%,
+    transparent 78%
+  );
+  content: '';
+  filter: blur(12.8px);
+  opacity: 0.82;
+  pointer-events: none;
+  transform: rotate(-9deg) translate3d(-18%, 6%, 0);
+  animation: focus-curve-light-flow calc(10800ms * var(--motion-scale, 1)) linear calc(-1700ms * var(--motion-scale, 1)) infinite;
+  will-change: transform;
+}
+
+@keyframes focus-curve-flow {
+  0% {
+    transform: rotate(10deg) translate3d(-10%, 4%, 0);
+  }
+  24% {
+    transform: rotate(13deg) translate3d(5%, -7%, 0);
+  }
+  49% {
+    transform: rotate(8deg) translate3d(16%, 4%, 0);
+  }
+  73% {
+    transform: rotate(12deg) translate3d(-5%, 10%, 0);
+  }
+  100% {
+    transform: rotate(10deg) translate3d(-10%, 4%, 0);
+  }
+}
+
+@keyframes focus-curve-light-flow {
+  0% {
+    transform: rotate(-9deg) translate3d(-18%, 6%, 0);
+  }
+  28% {
+    transform: rotate(-5deg) translate3d(7%, -5%, 0);
+  }
+  54% {
+    transform: rotate(-11deg) translate3d(16%, 8%, 0);
+  }
+  78% {
+    transform: rotate(-6deg) translate3d(-7%, -9%, 0);
+  }
+  100% {
+    transform: rotate(-9deg) translate3d(-18%, 6%, 0);
+  }
+}
+
+/* ───────────────────────────────────────────
+   Accessibility / Reduced Motion
+   ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .dynamicGradientField,
+  .dynamicCoreField,
+  .dynamicRipple,
+  .relationshipGradientFlow,
+  .focusArtwork::before,
+  .focusArtwork::after {
+    animation: none !important;
+  }
+}

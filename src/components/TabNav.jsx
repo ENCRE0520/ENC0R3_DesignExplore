@@ -1,23 +1,17 @@
-const tabs = [
-  { id: 'buttons', label: 'Buttons' },
-  { id: 'inputs', label: 'Inputs' },
-  { id: 'cards', label: 'Cards' },
-  { id: 'loading', label: 'Loading' },
-  { id: 'more', label: 'More' },
-  { id: 'widgets', label: 'Widgets' },
-];
-
-export default function TabNav({ active, onChange }) {
+export default function TabNav({ items, active, onChange }) {
   return (
-    <nav className="tab-nav">
+    <nav className="tab-nav" aria-label="Exploration categories">
       <div className="tab-list">
-        {tabs.map((tab) => (
+        {items.map((item) => (
           <button
-            key={tab.id}
-            className={`tab-item ${active === tab.id ? 'active' : ''}`}
-            onClick={() => onChange(tab.id)}
+            key={item.id}
+            className={`tab-item ${active === item.id ? 'active' : ''}`}
+            onClick={() => onChange(item.id)}
+            type="button"
+            aria-current={active === item.id ? 'page' : undefined}
           >
-            {tab.label}
+            {item.label}
+            {active === item.id && <span className="active-dot" aria-hidden="true" />}
           </button>
         ))}
       </div>

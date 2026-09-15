@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "predev": "node scripts/patch-liquid-dom.mjs",
+    "dev": "vite --force",
+    "prebuild": "node scripts/patch-liquid-dom.mjs",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "node scripts/patch-liquid-dom.mjs"
   },
   "dependencies": {
+    "@liquid-dom/react": "^0.1.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },

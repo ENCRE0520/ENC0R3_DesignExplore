@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+.shell {
+  --capsule-radius: var(--squircle-radius-20);
+  --surface-inset: var(--squircle-radius-6);
+  position: relative;
+  display: flex;
+  width: 156px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: visible;
+  border-radius: var(--capsule-radius);
+  corner-shape: superellipse(1.35);
+  background: #000;
+  box-shadow:
+    inset 0 -1px .8px rgba(255, 255, 255, .5),
+    inset 0 4px 4px rgba(255, 255, 255, .5),
+    inset 0 0 10px rgba(255, 255, 255, .25),
+    inset 0 -3px 4px rgba(255, 255, 255, .5),
+    0 16px 32px rgba(0, 0, 0, .3);
+  transform-origin: center;
+  transition: transform 90ms ease;
+}
+
+.button {
+  --capsule-radius: var(--squircle-radius-20);
+  --surface-inset: var(--squircle-radius-6);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 156px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--capsule-radius);
+  corner-shape: superellipse(1.35);
+  background: transparent;
+  box-shadow: none;
+  color: #000;
+  cursor: pointer;
+  font: 400 16px/16px 'Space Mono', monospace;
+  padding: 6px;
+  white-space: nowrap;
+  user-select: none;
+  touch-action: manipulation;
+  transition: filter 90ms ease, transform 90ms ease;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: var(--surface-inset);
+  z-index: 0;
+  border-radius: calc(var(--capsule-radius) - var(--surface-inset));
+  corner-shape: superellipse(1.35);
+  background: linear-gradient(180deg, #e4e4e4 0%, #dcdcdc 20%, #bfbfbf 49.951%, #848484 84.5%, #8a8a8a 100%);
+  box-shadow:
+    inset 0 4px 8px rgba(212, 212, 212, .25),
+    inset 0 -1px 4px rgba(255, 255, 255, .25),
+    inset -5px 0 8px rgba(0, 0, 0, .25),
+    inset 5px 0 8px rgba(0, 0, 0, .25),
+    inset 0 0 2.5px #fff,
+    6px 8px 16px rgba(0, 0, 0, .25);
+  transition: inset 90ms ease;
+  pointer-events: none;
+}
+
+.label {
+  position: relative;
+  z-index: 3;
+  transform-origin: center;
+  transition: transform 90ms ease;
+}
+
+.widget {
+  width: 143px;
+  flex: 0 0 143px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--squircle-radius-12) var(--squircle-radius-18) var(--squircle-radius-18) var(--squircle-radius-12);
+  corner-shape: squircle;
+  background: linear-gradient(180deg, #e4e4e4 0%, #dcdcdc 20%, #bfbfbf 49.951%, #848484 84.5%, #8a8a8a 100%);
+  box-shadow:
+    inset 0 4px 8px rgba(212, 212, 212, .25),
+    inset 0 -1px 4px rgba(255, 255, 255, .25),
+    inset -5px 0 8px rgba(0, 0, 0, .25),
+    inset 5px 0 8px rgba(0, 0, 0, .25),
+    inset 0 0 2.5px #fff,
+    6px 8px 16px rgba(0, 0, 0, .25);
+}
+
+.widget::before {
+  display: none;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  inset: var(--surface-inset);
+  z-index: 2;
+  border-radius: calc(var(--capsule-radius) - var(--surface-inset));
+  corner-shape: superellipse(1.35);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .15) 100%);
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, .25), inset 0 1px 2px rgba(0, 0, 0, .4);
+  opacity: 0;
+  transition: inset 90ms ease, opacity 150ms ease;
+  pointer-events: none;
+}
+
+.widget::after {
+  inset: 0;
+  border-radius: inherit;
+  corner-shape: squircle;
+}
+
+.button:active {
+  filter: brightness(.92);
+}
+
+.button:active::after {
+  opacity: 1;
+}
+
+.button:active .label {
+  transform: scale(.98);
+}
+
+/* Keep the outer capsule fixed and grow the inner rim by the same amount on every side. */
+.shell:has(.button:active) .button::before,
+.shell:has(.button:active) .button::after {
+  --surface-inset: var(--squircle-radius-7);
+}
+
+/* The widget version has no shell, so it keeps its own compact press feedback. */
+.widget:active {
+  transform: scale(.96);
+}
+
+.button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell,
+  .button,
+  .button::after,
+  .label {
+    transition: none;
+  }
+}

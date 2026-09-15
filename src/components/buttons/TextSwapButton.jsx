@@ -43,7 +43,6 @@ export default function TextSwapButton({ data, isSlowMotion }) {
 
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const [btnWidth, setBtnWidth] = useState(null);
 
   const btnRef = useRef(null);
   const animatingRef = useRef(false);
@@ -51,10 +50,11 @@ export default function TextSwapButton({ data, isSlowMotion }) {
   const currentTextRef = useRef(defaultText);
 
   useEffect(() => {
-    if (!hoverText) return;
+    const button = btnRef.current;
+    if (!button || !hoverText) return;
     const w1 = measureTextWidth(defaultText, 17);
     const w2 = measureTextWidth(hoverText, 17);
-    setBtnWidth(Math.ceil(Math.max(w1, w2)) + 88);
+    button.style.width = `${Math.ceil(Math.max(w1, w2)) + 88}px`;
   }, [defaultText, hoverText]);
 
   useEffect(() => {
@@ -195,8 +195,8 @@ export default function TextSwapButton({ data, isSlowMotion }) {
     >
       <button
         ref={btnRef}
+        type="button"
         className={className}
-        style={btnWidth ? { width: `${btnWidth}px` } : undefined}
         disabled={disabled}
       />
     </div>

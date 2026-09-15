@@ -18,8 +18,11 @@ export default function CodeIcon({ code, position = 'br' }) {
   return (
     <>
       <button
+        type="button"
         className="code-icon-trigger"
         style={posMap[position]}
+        aria-label={showCode ? 'Hide code' : 'View code'}
+        aria-expanded={showCode}
         onClick={(e) => {
           e.stopPropagation();
           setShowCode(!showCode);
@@ -32,7 +35,9 @@ export default function CodeIcon({ code, position = 'br' }) {
         <div className="code-tooltip" onClick={(e) => e.stopPropagation()}>
           <pre><code>{code}</code></pre>
           <button
+            type="button"
             className="code-close"
+            aria-label="Close code"
             onClick={(e) => {
               e.stopPropagation();
               setShowCode(false);

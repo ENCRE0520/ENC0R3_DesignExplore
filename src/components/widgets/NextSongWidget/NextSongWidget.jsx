@@ -1,13 +1,5 @@
-import './NextSongWidget.css';
+import NextSongWidgetLarge from '../NextSongWidgetLarge/NextSongWidgetLarge';
 
-export default function NextSongWidget() {
-  return (
-    <div className="widget next-widget">
-      <div className="disc" aria-hidden="true"><i /><b /></div>
-      <div className="player-bar">
-        <button aria-label="Play next song"><i className="iconfont icon-play" /></button>
-        <span>Next Song</span>
-      </div>
-    </div>
-  );
+export default function NextSongWidget(props) {
+  return <NextSongWidgetLarge compact {...props} />;
 }

@@ -3,7 +3,7 @@
   --display-inset: 14px;
   --display-width: 212px;
   --display-height: 120px;
-  --display-radius: 36px;
+  --display-radius: var(--squircle-radius-36);
   --action-size: 48px;
   --display-text-inset: 10px;
   --needle-width: 4px;

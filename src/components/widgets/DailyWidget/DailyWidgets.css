@@ -1,0 +1,447 @@
+/* Daily event widgets */
+.daily-event-widget,
+.daily-todo-widget {
+  background: #e6e6e6;
+  color: #000;
+  font-family: var(--font-rounded);
+  border-radius: var(--squircle-radius-64);
+  corner-shape: squircle;
+}
+
+.daily-event-details {
+  position: absolute;
+  inset: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.daily-event-details h3,
+.daily-todo-header h3 {
+  color: #999;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.daily-event-details h3 {
+  min-width: 100%;
+  font-size: 18px;
+}
+
+.daily-event-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.daily-event-copy,
+.daily-todo-event-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.daily-event-copy span,
+.daily-todo-event-copy span,
+.daily-event-members > span {
+  color: #999;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.daily-event-copy strong,
+.daily-todo-event-copy strong {
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.daily-event-action,
+.daily-todo-reminder {
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: #fcfcfc;
+  border-radius: 999px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .08);
+  transition: background-color 180ms cubic-bezier(.2, 0, 0, 1), color 180ms cubic-bezier(.2, 0, 0, 1), transform 120ms ease-out;
+  touch-action: manipulation;
+}
+
+.daily-event-action:active,
+.daily-todo-reminder:active {
+  transform: scale(.96);
+}
+
+.daily-event-action {
+  width: 52px;
+  height: 36px;
+  padding: 8px 16px;
+}
+
+.daily-event-action--active {
+  background: #0779ff;
+}
+
+.daily-event-action img {
+  width: 20px;
+  height: 20px;
+}
+
+.daily-reminder-icon {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.daily-event-action .daily-reminder-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.daily-todo-reminder .daily-reminder-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.daily-reminder-icon img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(.82);
+  transition: opacity 180ms cubic-bezier(.2, 0, 0, 1), transform 180ms cubic-bezier(.2, 0, 0, 1);
+}
+
+.daily-reminder-icon .daily-reminder-icon-off {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.daily-todo-widget .daily-todo-reminder:not(.daily-todo-reminder--active) .daily-reminder-icon-off {
+  opacity: 1;
+  visibility: visible;
+}
+
+.daily-todo-widget .daily-todo-reminder:not(.daily-todo-reminder--active) .daily-reminder-icon-on {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.daily-event-widget .daily-event-action:not(.daily-event-action--active) .daily-reminder-icon-on {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.daily-event-action--active .daily-reminder-icon-off,
+.daily-todo-reminder--active .daily-reminder-icon-off {
+  opacity: 0;
+  transform: scale(.82);
+  visibility: hidden;
+}
+
+.daily-event-action--active .daily-reminder-icon-on,
+.daily-todo-reminder--active .daily-reminder-icon-on {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.daily-event-members {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.daily-avatar-stack {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  isolation: isolate;
+}
+
+.daily-avatar-shell {
+  position: relative;
+  width: 47px;
+  height: 47px;
+  flex: 0 0 47px;
+  padding: 2px;
+  overflow: visible;
+  border: .5px solid rgba(255, 255, 255, .36);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+  backdrop-filter: blur(12px);
+}
+
+.daily-avatar-stack:not(.daily-avatar-stack--wide) .daily-avatar-shell:not(:last-child) {
+  margin-right: -11.5px;
+}
+
+.daily-avatar-stack--wide .daily-avatar-shell:not(:last-child) {
+  margin-right: -15.2px;
+}
+
+.daily-avatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #fcfcfc;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .08);
+}
+
+.daily-avatar-image {
+  position: absolute;
+  max-width: none;
+}
+
+.daily-avatar--count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #828282;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Wide event + todo widget */
+.daily-todo-widget {
+  width: 514px;
+  height: 240px;
+  border-radius: var(--squircle-radius-64);
+  corner-shape: squircle;
+  transform: translate(-50%, -50%) scale(.4902723735);
+}
+
+.daily-todo-content {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 486px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.daily-todo-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+}
+
+.daily-todo-header h3 {
+  font-size: 22px;
+}
+
+.daily-todo-reminder-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.daily-todo-widget .daily-todo-reminder {
+  position: relative;
+  width: 42px;
+  min-width: 42px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font: 700 12px/1.2 var(--font-rounded);
+  padding: 6px 12px;
+  color: #4d4d4d;
+  white-space: nowrap;
+  transition: width 220ms cubic-bezier(.32, .72, 0, 1), background-color 180ms cubic-bezier(.2, 0, 0, 1), color 180ms cubic-bezier(.2, 0, 0, 1), transform 120ms ease-out;
+}
+
+.daily-todo-widget .daily-todo-reminder--active {
+  width: 129.22px;
+  background: #0779ff;
+  color: #fff;
+}
+
+.daily-todo-reminder img {
+  width: 18px;
+  height: 18px;
+}
+
+.daily-todo-reminder-label {
+  flex: 0 0 auto;
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-4px);
+  transition: opacity 220ms cubic-bezier(.32, .72, 0, 1), filter 220ms cubic-bezier(.32, .72, 0, 1), transform 220ms cubic-bezier(.32, .72, 0, 1);
+}
+
+.daily-todo-widget .daily-todo-reminder:not(.daily-todo-reminder--active) .daily-todo-reminder-label {
+  position: absolute;
+}
+
+.daily-todo-widget .daily-todo-reminder--active .daily-todo-reminder-label {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+
+.daily-todo-event {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 14px;
+}
+
+.daily-todo-event-copy strong {
+  font-size: 18px;
+}
+
+.daily-todo-event-copy--time {
+  margin-left: 14px;
+}
+
+.daily-todo-event .daily-avatar-stack {
+  width: 200px;
+  flex: 0 0 200px;
+}
+
+.daily-todo-panel {
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f2f2f2;
+}
+
+.daily-todo-summary {
+  width: 60px;
+  height: 100%;
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.daily-todo-count {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  padding-inline: 4px;
+  white-space: nowrap;
+}
+
+.daily-todo-count strong {
+  color: #0779ff;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.daily-todo-count span {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.daily-todo-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 4px;
+  color: #999;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.daily-todo-status span {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.daily-todo-status b {
+  width: 8px;
+  color: #0779ff;
+  font-size: 14px;
+  text-align: center;
+}
+
+.daily-todo-status span:last-child b {
+  color: #999;
+}
+
+.daily-todo-vertical-divider {
+  width: 2px;
+  height: 83.5px;
+  flex: 0 0 2px;
+}
+
+.daily-todo-list {
+  min-width: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.daily-todo-list button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 4px 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e6e6e6;
+  color: #999;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  cursor: pointer;
+  white-space: nowrap;
+  will-change: transform;
+  transition: background-color 150ms ease, color 150ms ease, transform 240ms cubic-bezier(.22, .61, .36, 1);
+}
+
+.daily-todo-list button.is-active {
+  background: #0779ff;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .daily-event-action,
+  .daily-todo-reminder,
+  .daily-reminder-icon img,
+  .daily-todo-reminder-label,
+  .daily-todo-list button {
+    animation: none;
+    transition: none;
+    filter: none;
+  }
+}

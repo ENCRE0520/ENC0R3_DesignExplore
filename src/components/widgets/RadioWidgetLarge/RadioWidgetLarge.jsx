@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './RadioWidgetLarge.css';
+import pixelHeart from '../../../assets/pixel-heart.svg';
 
 const stations = [87.2, 91.5, 97.3, 101.3, 102.6, 103.1];
 const SCALE_MIN = 87;
@@ -8,8 +9,10 @@ const SCALE_LABEL_MAX = 103;
 export default function RadioWidgetLarge() {
   const [stationIndex, setStationIndex] = useState(2);
   const [volume, setVolume] = useState(40);
+  const [showVolume, setShowVolume] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOn, setIsOn] = useState(true);
+  const volumeHideTimer = useRef(null);
 
   const frequency = stations[stationIndex];
   /* Fraction within the label range 87–103 MHz;
@@ -21,6 +24,32 @@ export default function RadioWidgetLarge() {
     setStationIndex((index) => (index + step + stations.length) % stations.length);
   };
 
+  const hideVolumeIndicator = () => {
+    if (volumeHideTimer.current) window.clearTimeout(volumeHideTimer.current);
+    volumeHideTimer.current = null;
+    setShowVolume(false);
+  };
+
+  const adjustVolume = (step) => {
+    if (!isOn) return;
+    setVolume((value) => Math.max(0, Math.min(100, value + step)));
+    setShowVolume(true);
+    if (volumeHideTimer.current) window.clearTimeout(volumeHideTimer.current);
+    volumeHideTimer.current = window.setTimeout(() => {
+      setShowVolume(false);
+      volumeHideTimer.current = null;
+    }, 1400);
+  };
+
+  useEffect(() => () => {
+    if (volumeHideTimer.current) window.clearTimeout(volumeHideTimer.current);
+  }, []);
+
+  const togglePower = () => {
+    if (isOn) hideVolumeIndicator();
+    setIsOn((on) => !on);
+  };
+
   return (
     <div className={`widget rwl-widget ${isOn ? 'is-on' : 'is-off'}`}>
       <div className="rwl-chassis">
@@ -30,9 +59,22 @@ export default function RadioWidgetLarge() {
             <span>FM</span>
             <strong>{frequency.toFixed(1)}</strong>
           </div>
+          <div
+            className={`rwl-volume-indicator ${showVolume ? 'is-visible' : ''}`}
+            aria-hidden={!showVolume || !isOn}
+            aria-label={`Volume ${volume}%`}
+          >
+            <span className="rwl-volume-label">VOL</span>
+            <span className="rwl-volume-track" aria-hidden="true">
+              {Array.from({ length: 10 }, (_, index) => (
+                <i key={index} className={`rwl-volume-segment ${index < Math.round(volume / 10) ? 'is-active' : ''}`} />
+              ))}
+            </span>
+            <span className="rwl-volume-value">{String(volume).padStart(2, '0')}</span>
+          </div>
           <p className="rwl-quality">96.0KHz · 24bit</p>
           <div className="rwl-presets">
-            <span aria-hidden="true"><i className="iconfont icon-heart" /></span>
+            <span aria-hidden="true"><img className="rwl-preset-heart" src={pixelHeart} alt="" draggable={false} /></span>
             {stations.map((station, index) => (
               <button
                 type="button"
@@ -58,9 +100,9 @@ export default function RadioWidgetLarge() {
 
           <div className="rwl-small-actions">
             <div className="rwl-action-pair">
-              <button type="button" aria-label={`Volume up, current volume ${volume}`} onClick={() => isOn && setVolume((value) => Math.min(100, value + 10))}><i className="iconfont icon-plus" /></button>
+              <button type="button" aria-label={`Volume up, current volume ${volume}`} onClick={() => adjustVolume(10)}><i className="iconfont icon-plus" /></button>
               <span className="rwl-between-icon"><i className="iconfont icon-volume-min" /></span>
-              <button type="button" aria-label={`Volume down, current volume ${volume}`} onClick={() => isOn && setVolume((value) => Math.max(0, value - 10))}><i className="iconfont icon-minus" /></button>
+              <button type="button" aria-label={`Volume down, current volume ${volume}`} onClick={() => adjustVolume(-10)}><i className="iconfont icon-minus" /></button>
             </div>
             <button
               type="button"
@@ -86,7 +128,7 @@ export default function RadioWidgetLarge() {
               className="rwl-power"
               aria-label="Power"
               aria-pressed={isOn}
-              onClick={() => setIsOn((on) => !on)}
+              onClick={togglePower}
             >
               <i className="iconfont icon-power-01" />
             </button>

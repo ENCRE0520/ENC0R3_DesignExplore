@@ -3,7 +3,7 @@ import './FormulaOneWidget.css';
 export default function FormulaOneWidget() {
   return (
     <div className="widget formula-one-widget" role="img" aria-label="Charles Leclerc, 230 points">
-      <img className="formula-one-car" src="/daily-sf25.png" alt="" />
+      <img className="formula-one-car" src="/daily-sf25.png" alt="" draggable={false} />
 
       <div className="formula-one-ferrari-logo" />
       <div className="formula-one-driver">

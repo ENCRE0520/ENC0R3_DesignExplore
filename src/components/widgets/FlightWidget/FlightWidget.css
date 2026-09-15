@@ -1,7 +1,7 @@
 /* Flight */
 .flight-widget {
   --widget-padding: 6px;
-  --panel-radius: calc(var(--widget-outer-radius) - var(--widget-padding));
+  --panel-radius: var(--squircle-radius-58);
   --panel-padding: 8px;
   --info-column-width: 52px;
   --info-row-height: 48px;
@@ -14,6 +14,12 @@
   display: flex;
   flex-direction: column;
   padding: var(--widget-padding);
+}
+
+@supports (corner-shape: squircle) and (corner-shape: superellipse(1.35)) {
+  .flight-widget {
+    --panel-radius: calc(var(--widget-outer-radius) - var(--widget-padding));
+  }
 }
 
 .sky {

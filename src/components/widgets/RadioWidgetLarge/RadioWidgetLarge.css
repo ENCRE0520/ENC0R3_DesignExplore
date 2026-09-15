@@ -1,8 +1,8 @@
 .rwl-widget {
   --rwl-bezel: #313131;
-  width: 504px;
+  width: 514px;
   height: 240px;
-  border-radius: var(--widget-outer-radius);
+  border-radius: var(--squircle-radius-64);
   corner-shape: squircle;
   background: #e6e6e6;
   color: #272727;
@@ -16,7 +16,7 @@
   left: 0;
   width: 100%;
   height: 229px;
-  border-radius: var(--widget-outer-radius);
+  border-radius: var(--squircle-radius-64);
   corner-shape: squircle;
   background:
     linear-gradient(180deg, transparent 88.333%, rgba(255, 255, 255, .3) 100%),
@@ -34,7 +34,7 @@
   overflow: hidden;
   z-index: 1;
   border: .2px solid transparent;
-  border-radius: var(--widget-outer-radius);
+  border-radius: var(--squircle-radius-64);
   corner-shape: squircle;
   background:
     linear-gradient(var(--rwl-bezel), var(--rwl-bezel)) padding-box,
@@ -43,6 +43,7 @@
 }
 
 .rwl-lcd {
+  --rwl-lcd-projection: 0 1px #c7c7c766;
   position: relative;
   width: 240px;
   height: 202px;
@@ -50,14 +51,14 @@
   transform-origin: left center;
   overflow: hidden;
   border: 2px solid transparent;
-  border-radius: 30px;
+  border-radius: var(--squircle-radius-30);
   corner-shape: squircle;
   background:
     linear-gradient(#999, #999) padding-box,
     linear-gradient(105deg, #545454 0%, #5d5d5d 39.5%, #4e4e4e 69.3%, #616161 100%) border-box;
   box-shadow: inset 0 0 25px rgba(0, 0, 0, .25);
   font-family: var(--font-pixel);
-  text-shadow: 0 1px #c7c7c766;
+  text-shadow: var(--rwl-lcd-projection);
 }
 
 .rwl-station-name {
@@ -80,11 +81,66 @@
 .rwl-reading span { font-size: 32px; line-height: 36px; }
 .rwl-reading strong { font-size: 48px; font-weight: 400; line-height: 48px; }
 
+.rwl-volume-indicator {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  right: 10px;
+  grid-template-columns: 22px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 6px;
+  height: 16px;
+  color: #4a4a4a;
+  font: 8px/1 var(--font-pixel);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  display: none;
+}
+
+.rwl-volume-indicator.is-visible {
+  display: grid;
+}
+
+.rwl-volume-label,
+.rwl-volume-value {
+  white-space: nowrap;
+  text-align: center;
+  text-shadow: var(--rwl-lcd-projection);
+}
+
+.rwl-volume-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 2px;
+  height: 10px;
+  padding: 2px;
+  border: 1px solid #666;
+  border-radius: 0;
+  background: #8f8f8f;
+  box-shadow: none;
+}
+
+.rwl-volume-segment {
+  display: block;
+  min-width: 0;
+  height: 4px;
+  background: #484848;
+  opacity: .18;
+  box-shadow: 0 1px 0 rgba(199, 199, 199, .22);
+}
+
+.rwl-volume-segment.is-active {
+  opacity: .88;
+  box-shadow: 0 1px 0 rgba(199, 199, 199, .4);
+}
+
 .rwl-quality {
   position: absolute;
   left: 10px;
-  top: 160px;
+  top: 156px;
   font-size: 14px;
+  line-height: 1;
 }
 
 .rwl-presets {
@@ -110,6 +166,7 @@
 }
 
 .rwl-presets > span { color: #555; font-size: 16px; }
+.rwl-preset-heart { display: block; width: 16px; height: 16px; flex: 0 0 16px; }
 
 .rwl-presets button {
   flex: 0 0 auto;
@@ -119,6 +176,7 @@
   background: transparent;
   border-radius: 0;
   font: 12px/1 var(--font-pixel);
+  text-shadow: var(--rwl-lcd-projection);
 }
 
 .rwl-presets button:nth-of-type(1) { width: 32px; }
@@ -152,7 +210,7 @@
   height: 64px;
   overflow: hidden;
   border: 2px solid transparent;
-  border-radius: 18px;
+  border-radius: var(--squircle-radius-18);
   corner-shape: squircle;
   background:
     linear-gradient(#999, #999) padding-box,
@@ -290,7 +348,7 @@
   padding: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 3px 18px 18px 3px;
+  border-radius: var(--squircle-radius-3) var(--squircle-radius-18) var(--squircle-radius-18) var(--squircle-radius-3);
   corner-shape: squircle;
   color: #bbb;
   display: grid;
@@ -311,14 +369,23 @@
   border-radius: inherit;
   corner-shape: squircle;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.4)) padding-box,
-    linear-gradient(125deg, rgba(255,255,255,.15), rgba(255,255,255,.05) 40.6% 57.4%, rgba(255,255,255,.15)) border-box;
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.026) 0%,
+      rgba(255,255,255,.018) 18%,
+      rgba(255,255,255,.004) 42%,
+      rgba(0,0,0,.10) 68%,
+      rgba(0,0,0,.26) 100%
+    ) padding-box,
+    linear-gradient(125deg, rgba(255,255,255,.10), rgba(255,255,255,.035) 40.6% 57.4%, rgba(255,255,255,.09)) border-box;
   transition: transform 100ms ease;
 }
 
 .rwl-transport button > i { position: relative; z-index: 1; transition: transform 100ms ease; }
-.rwl-transport button:first-child { border-radius: 18px 3px 3px 18px; }
-.rwl-transport button:nth-child(2) { border-radius: 3px; }
+.rwl-transport button:first-child {
+  border-radius: var(--squircle-radius-18) var(--squircle-radius-3) var(--squircle-radius-3) var(--squircle-radius-18);
+}
+.rwl-transport button:nth-child(2) { border-radius: var(--squircle-radius-3); }
 
 /* Skeuomorphic press: outer shell & bottom highlight stay fixed;
    ::before surface + icon slide down on Y axis */
@@ -338,21 +405,37 @@
 .rwl-transport .rwl-power {
   color: #6a6a6a;
   background: #222;
+  box-shadow: 4px -4px 4px rgba(0,0,0,.25), 0 4px 4px rgba(255,255,255,.1);
+  transition: filter 100ms ease, box-shadow 100ms ease, color 250ms ease;
 }
 
 .rwl-widget.is-on .rwl-power {
   color: #9cc5ff;
-  background:
-    radial-gradient(ellipse at 40% 95%, rgba(0,82,205,.7), rgba(0,31,77,.7)),
-    #4d4d4d;
   box-shadow: 4px -4px 4px rgba(0,0,0,.25), 0 4px 4px rgba(255,255,255,.1);
 }
 
-.rwl-widget.is-on .rwl-power::before {
+.rwl-power::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background:
     radial-gradient(ellipse at 50% 50%, rgba(0,102,255,.7), rgba(0,0,0,.5)) padding-box,
-    linear-gradient(125deg, rgba(255,255,255,.4), rgba(255,255,255,.2) 40.6% 57.4%, rgba(255,255,255,.4)) border-box;
+    linear-gradient(125deg, rgba(255,255,255,.4), rgba(255,255,255,.2) 40.6% 57.4%, rgba(255,255,255,.4)) border-box,
+    radial-gradient(ellipse at 40% 95%, rgba(0,82,205,.7), rgba(0,31,77,.7)),
+    #4d4d4d;
   box-shadow: inset 0 0 17.2px rgba(1,70,174,.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
+}
+
+.rwl-widget.is-on .rwl-power::after {
+  opacity: 1;
+}
+
+.rwl-widget.is-on .rwl-power:active {
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.35), 0 4px 4px rgba(255,255,255,.1);
 }
 
 /* Off state: only the power button loses its glow */
@@ -378,5 +461,6 @@
   .rwl-needle,
   .rwl-widget button,
   .rwl-widget button > i,
-  .rwl-widget button::before { transition: none; }
+  .rwl-widget button::before,
+  .rwl-power::after { transition: none; }
 }

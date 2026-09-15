@@ -3,40 +3,43 @@ import TabNav from './components/TabNav';
 import CardGrid from './components/CardGrid';
 import buttonData from './data/buttons';
 import widgetData from './data/widgets';
+import shaderData from './data/shaders';
+import { categories } from './data/taxonomy';
 import './index.css';
 
-const PLACEHOLDER_TABS = ['inputs', 'cards', 'loading', 'more'];
+const explorations = [...buttonData, ...widgetData, ...shaderData];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('buttons');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const category = categories.find((item) => item.id === activeCategory) || categories[0];
+  const filteredExplorations = explorations.filter(
+    (item) => activeCategory === 'all' || item.category === activeCategory,
+  );
+
+  const handleCategoryChange = (categoryId) => {
+    setActiveCategory(categoryId);
+  };
 
   return (
     <div className="app">
-      {/* Header */}
-      <header className="header">
+      <header className="sidebar">
         <h1 className="title">Design Explorer</h1>
-        <p className="subtitle">Exploring the craft of UI — one element at a time.</p>
+        <TabNav items={categories} active={activeCategory} onChange={handleCategoryChange} />
       </header>
 
-      {/* Tab Navigation */}
-      <TabNav active={activeTab} onChange={setActiveTab} />
-
-      {/* Content */}
-      <main className="content">
-        {activeTab === 'buttons' && <CardGrid items={buttonData} />}
-        {activeTab === 'widgets' && <CardGrid items={widgetData} />}
-
-        {PLACEHOLDER_TABS.includes(activeTab) && (
-          <div className="placeholder-page">
-            <div className="placeholder-icon">
-              <i className="iconfont" style={{ fontSize: '64px', color: '#ccc' }}>{'\ue66d'}</i>
-            </div>
-            <h2>Coming Soon</h2>
+      <main className="content" id="exploration-content">
+        {filteredExplorations.length > 0 ? (
+          <CardGrid items={filteredExplorations} />
+        ) : (
+          <section className="empty-state" aria-labelledby="empty-state-title">
+            <h3 id="empty-state-title">No {category.label.toLowerCase()} yet.</h3>
             <p>
-              The <strong>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</strong> exploration
-              is under construction.
+              This space is ready for the first study that belongs here.
             </p>
-          </div>
+            <button type="button" onClick={() => handleCategoryChange('all')}>
+              View All Explorations
+            </button>
+          </section>
         )}
       </main>
     </div>

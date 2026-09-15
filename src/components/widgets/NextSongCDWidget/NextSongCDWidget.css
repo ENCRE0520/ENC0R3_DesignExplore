@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.nscd-widget {
+  width: 514px;
+  height: 240px;
+  border-radius: var(--squircle-radius-64);
+  corner-shape: squircle;
+  background: #e6e6e6;
+  transform: translate(-50%, -50%) scale(.4902723735);
+}
+
+.nscd-widget--compact {
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%) scale(.5);
+}
+
+.nscd-album {
+  position: absolute;
+  z-index: 1;
+  top: 14px;
+  left: 14px;
+  width: 212px;
+  height: 212px;
+}
+
+.nscd-album-ring {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 12px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 24px rgba(0, 0, 0, .05);
+}
+
+.nscd-album-crop {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.nscd-album-crop img {
+  position: absolute;
+  top: -8.11%;
+  left: -7.85%;
+  width: 118.39%;
+  height: 115.32%;
+  max-width: none;
+  filter: none;
+  transition: filter 300ms ease;
+}
+
+.nscd-cd-disc.is-shimmering {
+  animation: nscd-cd-light-flicker 4.2s ease-in-out infinite;
+}
+
+/* 旋转播放时微弱自然的高光/阴影呼吸光效（幅度非常轻微） */
+@keyframes nscd-cd-light-flicker {
+  0%   { filter: brightness(1) contrast(1); }
+  18%  { filter: brightness(1.025) contrast(1.03); }
+  35%  { filter: brightness(0.985) contrast(0.985); }
+  52%  { filter: brightness(1.035) contrast(1.045); }
+  70%  { filter: brightness(1.01) contrast(1.015); }
+  85%  { filter: brightness(0.98) contrast(0.98); }
+  100% { filter: brightness(1) contrast(1); }
+}
+
+.nscd-cd-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 50%;
+  background:
+    conic-gradient(from 18deg,
+      rgba(255, 255, 255, 0) 0deg 22deg,
+      rgba(236, 216, 146, .22) 38deg,
+      rgba(255, 255, 255, 0) 62deg 98deg,
+      rgba(157, 228, 203, .21) 122deg,
+      rgba(255, 255, 255, 0) 154deg 194deg,
+      rgba(169, 192, 231, .2) 218deg,
+      rgba(255, 255, 255, 0) 246deg 286deg,
+      rgba(225, 181, 213, .2) 308deg,
+      rgba(255, 255, 255, 0) 334deg 360deg),
+    radial-gradient(circle, transparent 0 17%, rgba(229, 229, 229, .06) 18% 35%, transparent 53%);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 16%, #000 17% 100%);
+  mask-image: radial-gradient(circle, transparent 0 16%, #000 17% 100%);
+  mix-blend-mode: screen;
+  opacity: .6;
+  transform-origin: center;
+  animation: nscd-sheen-spin 8s linear infinite;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
+.nscd-cd-sheen.is-spinning {
+  animation: nscd-sheen-spin 8s linear infinite, nscd-sheen-pulse 3.8s ease-in-out infinite alternate;
+  animation-play-state: running;
+}
+
+@keyframes nscd-sheen-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes nscd-sheen-pulse {
+  0%   { opacity: .56; }
+  100% { opacity: .66; }
+}
+
+.nscd-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 28px;
+  left: 260px;
+  width: 226px;
+  height: 64px;
+}
+
+.nscd-song-info {
+  position: absolute;
+  z-index: 3;
+  top: 110px;
+  left: 258px;
+  display: flex;
+  width: 159px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: 'Space Mono', monospace;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+
+.nscd-song-info span,
+.nscd-song-info strong {
+  width: 100%;
+  white-space: nowrap;
+  -webkit-text-stroke: .1px #d8d8d8;
+  text-shadow: 0 0 1px #fff;
+}
+
+.nscd-song-info span {
+  color: #676767;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.nscd-song-info strong {
+  color: #000;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.nscd-player {
+  position: absolute;
+  z-index: 4;
+  top: 174px;
+  left: 86px;
+  display: flex;
+  width: 428px;
+  height: 52px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 6px;
+  overflow: visible;
+  border-radius: var(--squircle-radius-27) 0 0 var(--squircle-radius-27);
+  corner-shape: squircle;
+  background: #000;
+  box-shadow:
+    inset 0 -1px .8px rgba(255, 255, 255, .5),
+    inset 0 4px 4px rgba(255, 255, 255, .5),
+    inset 0 0 10px rgba(255, 255, 255, .25),
+    inset 0 -3px 4px rgba(255, 255, 255, .5),
+    0 16px 32px rgba(0, 0, 0, .3);
+}
+
+.nscd-widget--compact .nscd-overlay,
+.nscd-widget--compact .nscd-song-info {
+  display: none;
+}
+
+.nscd-widget--compact .nscd-player {
+  top: 174px;
+  left: 14px;
+  width: 212px;
+  border-radius: var(--squircle-radius-27);
+  corner-shape: squircle;
+}
+
+.nscd-controls {
+  --nscd-metal-gradient: linear-gradient(
+    146deg,
+    #9e9e9e 0%,
+    #bababa 12%,
+    #e4e4e4 25%,
+    #cbcbcb 40%,
+    #a4a4a4 54%,
+    #cfcfcf 70%,
+    #e4e4e4 82%,
+    #a6a6a6 100%
+  );
+  --nscd-metal-gradient-active: linear-gradient(
+    146deg,
+    #9e9e9e 0%,
+    #a8a8a8 12%,
+    #b8b8b8 25%,
+    #aaaaaa 40%,
+    #a4a4a4 54%,
+    #adadad 70%,
+    #b8b8b8 82%,
+    #a6a6a6 100%
+  );
+  display: grid;
+  width: 269px;
+  height: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.nscd-control {
+  position: relative;
+  isolation: isolate;
+  height: 40px;
+  overflow: hidden;
+  border: 0 !important;
+  color: #000;
+  border-radius: var(--squircle-radius-15);
+  corner-shape: squircle;
+  font-size: 24px !important;
+  background-image: var(--nscd-metal-gradient);
+  background-size: 269px 40px;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, .5),
+    inset 0 -1px 1.5px rgba(0, 0, 0, .18);
+  transition: transform 90ms ease, box-shadow 90ms ease;
+}
+
+.nscd-control:first-child {
+  border-radius: var(--squircle-radius-21) var(--squircle-radius-15) var(--squircle-radius-15) var(--squircle-radius-21);
+}
+
+/* Align each tile to the same wide gradient so the reflection reads as one
+   continuous metal surface, rather than three unrelated diagonal fills. */
+.nscd-play { background-position: 0 0; }
+.nscd-heart { background-position: -91px 0; }
+.nscd-scan { background-position: -182px 0; }
+
+.nscd-control i,
+.nscd-control img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  -webkit-text-stroke: .3px #858585;
+  text-shadow: none;
+}
+
+.nscd-play i,
+.nscd-heart i { font-size: 24px !important; }
+.nscd-scan i { font-size: 22px !important; }
+.nscd-heart.is-active i { color: #b8303d; }
+
+.nscd-widget--compact .nscd-controls {
+  --nscd-metal-gradient: linear-gradient(
+    146deg,
+    #9e9e9e 0%,
+    #bababa 16%,
+    #e4e4e4 38%,
+    #cbcbcb 56%,
+    #a4a4a4 76%,
+    #a6a6a6 100%
+  );
+  --nscd-metal-gradient-active: linear-gradient(
+    146deg,
+    #9e9e9e 0%,
+    #a8a8a8 16%,
+    #b8b8b8 38%,
+    #aaaaaa 56%,
+    #a4a4a4 76%,
+    #a6a6a6 100%
+  );
+  width: 53px;
+  grid-template-columns: 1fr;
+}
+
+.nscd-widget--compact .nscd-control {
+  width: 53px;
+  background-size: 53px 40px;
+  background-position: 0 0;
+}
+
+.nscd-control::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  corner-shape: squircle;
+  background-image: var(--nscd-metal-gradient-active);
+  background-size: inherit;
+  background-position: inherit;
+  opacity: 0;
+  transition: opacity 90ms ease;
+  pointer-events: none;
+}
+
+.nscd-control:active::after {
+  opacity: 1;
+}
+
+.nscd-control:active {
+  transform: scale(.96);
+  box-shadow:
+    inset 0 1.5px 3px rgba(0, 0, 0, .25),
+    inset 0 -0.5px 1px rgba(255, 255, 255, .15);
+}
+
+.nscd-control:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nscd-control,
+  .nscd-control::after,
+  .nscd-cd-sheen,
+  .nscd-cd-disc { transition: none; animation: none; }
+}

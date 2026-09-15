@@ -2,7 +2,7 @@
 .bucket-widget {
   --countdown-width: 144px;
   --countdown-height: 76px;
-  --countdown-radius: 28px;
+  --countdown-radius: var(--squircle-radius-28);
   --digit-width: 24px;
   --tag-track-width: 440px;
   display: flex;

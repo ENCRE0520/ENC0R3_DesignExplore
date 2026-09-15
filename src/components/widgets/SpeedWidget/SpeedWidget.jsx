@@ -55,17 +55,38 @@ export default function SpeedWidget() {
   const [speed, setSpeed] = useState(40);
 
   useEffect(() => {
-    const distanceTimer = setInterval(() => {
-      setDistance(d => Math.max(200, d - 10));
-    }, 1500);
+    let distanceTimer;
+    let speedTimer;
 
-    const speedTimer = setInterval(() => {
-      setSpeed(s => Math.min(50, s + 1));
-    }, 1500);
+    const tickDistance = () => {
+      const delay = 500 + Math.random() * 2000;
+      distanceTimer = setTimeout(() => {
+        setDistance(d => {
+          const decrement = Math.floor(Math.random() * 10) + 5;
+          const next = d - decrement;
+          return next < 200 ? 350 : next;
+        });
+        tickDistance();
+      }, delay);
+    };
+
+    const tickSpeed = () => {
+      const delay = 300 + Math.random() * 1500;
+      speedTimer = setTimeout(() => {
+        setSpeed(s => {
+          const change = Math.floor(Math.random() * 5) - 2;
+          return Math.min(65, Math.max(25, s + change));
+        });
+        tickSpeed();
+      }, delay);
+    };
+
+    tickDistance();
+    tickSpeed();
 
     return () => {
-      clearInterval(distanceTimer);
-      clearInterval(speedTimer);
+      clearTimeout(distanceTimer);
+      clearTimeout(speedTimer);
     };
   }, []);
 
