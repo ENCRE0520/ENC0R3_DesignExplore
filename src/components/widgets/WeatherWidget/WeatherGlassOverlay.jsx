@@ -19,7 +19,13 @@ const GLASS_CORNER_RADIUS = GLASS_RADIUS * (SUPPORTS_CORNER_SHAPE ? 1 : 1 / 2);
 const GLASS_CORNER_SMOOTHING = SUPPORTS_CORNER_SHAPE ? 0.6 : 0;
 
 const WeatherGlassOverlay = forwardRef(function WeatherGlassOverlay(
-  { children, details = false, isWebGPUSupported = true, onCompatibilityError },
+  {
+    children,
+    details = false,
+    isActive = true,
+    isWebGPUSupported = true,
+    onCompatibilityError,
+  },
   ref,
 ) {
   const supportsLiquidDom = isWebGPUSupported
@@ -33,6 +39,10 @@ const WeatherGlassOverlay = forwardRef(function WeatherGlassOverlay(
     reportError,
   } = useLiquidGlassRenderer({
     enabled: supportsLiquidDom,
+    // Coverflow mounts hidden slides before they become visible. Delay the
+    // first GPU paint until this slide is active; HTML-in-Canvas can otherwise
+    // capture the hidden subtree as an opaque black frame and never refresh it.
+    readyKey: isActive,
     onError: onCompatibilityError,
   });
   const liquidReady = hasPainted;
@@ -62,7 +72,21 @@ const WeatherGlassOverlay = forwardRef(function WeatherGlassOverlay(
 
     liquidRef.current?.invalidateLayout();
     liquidRef.current?.invalidateFrame();
-  }, [liquidEnabled, liquidRef]);
+  }, [isActive, liquidEnabled, liquidRef]);
+
+  useEffect(() => {
+    if (!liquidEnabled || !isActive) return undefined;
+
+    const repaintTimers = [0, 120, 500].map((delay) => (
+      setTimeout(() => {
+        liquidRef.current?.renderer?.syncCanvasSize();
+        liquidRef.current?.invalidateLayout();
+        liquidRef.current?.invalidateFrame();
+      }, delay)
+    ));
+
+    return () => repaintTimers.forEach((timer) => clearTimeout(timer));
+  }, [isActive, liquidEnabled, liquidRef]);
 
   return (
     <>

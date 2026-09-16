@@ -35,6 +35,7 @@ function WeatherVisual() {
 
 export default function WeatherWidget({
   isExpanded = false,
+  isActive = true,
   parallaxBoundaryRef,
   isWebGPUSupported = true,
   onCompatibilityError,
@@ -55,6 +56,7 @@ export default function WeatherWidget({
       <div className="weather-widget-face">
         <WeatherGlassOverlay
           ref={glassRef}
+          isActive={isActive}
           isWebGPUSupported={isWebGPUSupported}
           onCompatibilityError={onCompatibilityError}
         >
