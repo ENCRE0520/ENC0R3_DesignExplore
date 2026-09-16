@@ -46,14 +46,17 @@ export default function Card({ data }) {
     unsupportedReason,
   } = useWebGPUSupport(requiresWebGPU);
   const [hasRuntimeError, setHasRuntimeError] = useState(false);
-  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const hasWebGPUIssue = requiresWebGPU && (hasRuntimeError || (!isCheckingWebGPU && !isWebGPUSupported));
-  const hasCompatibilityIssue = hasWebGPUIssue;
-  const warningMessage = hasRuntimeError
-    ? 'Liquid Glass 渲染失败，已切换为静态样式。'
+  const compatibilityMessage = hasRuntimeError
+    ? 'This preview is static because Liquid Glass failed to render in your browser. Use the latest version of Chrome for the full effect.'
     : unsupportedReason === 'html-in-canvas'
-      ? '浏览器不支持 Liquid Glass 依赖所需的 HTML-in-Canvas API，已切换为静态样式。'
-      : '浏览器不支持 Liquid Glass 依赖（WebGPU 不可用），已切换为静态样式。';
+      ? 'This preview is static because your browser does not support the HTML-in-Canvas API required by Liquid Glass. Use the latest version of Chrome for the full effect.'
+      : unsupportedReason === 'adapter'
+        ? 'This preview is static because your browser could not find a compatible GPU. Use the latest version of Chrome for the full effect.'
+        : unsupportedReason === 'canvas-context'
+          ? 'This preview is static because your browser could not create the WebGPU canvas required by Liquid Glass. Use the latest version of Chrome for the full effect.'
+          : 'This preview is static because WebGPU is unavailable in your browser. Use the latest version of Chrome for the full effect.';
+  const compatibilityLabel = compatibilityMessage;
   const handleCompatibilityError = useCallback(() => {
     setHasRuntimeError(true);
   }, []);
@@ -209,26 +212,17 @@ export default function Card({ data }) {
         </button>
       )}
 
-      {hasCompatibilityIssue && (
-        <button
-          type="button"
-          className={`card-compatibility-warning${isTooltipOpen ? ' is-active' : ''}`}
-          aria-label={warningMessage}
-          aria-expanded={isTooltipOpen}
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsTooltipOpen((prev) => !prev);
-          }}
-          onPointerLeave={(e) => {
-            if (e.pointerType === 'mouse') setIsTooltipOpen(false);
-          }}
-          onBlur={() => setIsTooltipOpen(false)}
+      {hasWebGPUIssue && (
+        <div
+          className="card-compatibility-status"
+          role="status"
+          aria-label={compatibilityMessage}
         >
           <span className="card-warning-icon-wrapper" aria-hidden="true">
             <WarningIcon />
           </span>
-          <span className="card-warning-text">{warningMessage}</span>
-        </button>
+          <span className="card-warning-text">{compatibilityLabel}</span>
+        </div>
       )}
     </div>
   );

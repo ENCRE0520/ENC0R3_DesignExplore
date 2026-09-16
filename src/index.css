@@ -579,47 +579,33 @@ button {
   color: #000;
 }
 
-/* ── Card Compatibility Warning ── */
-.card-compatibility-warning {
+/* ── Card Compatibility Status ── */
+.card-compatibility-status {
   position: absolute;
   top: 8px;
   left: 8px;
-  right: 8px;
-  width: auto;
-  height: var(--card-control-size);
-  min-width: var(--card-control-size);
+  max-width: calc(100% - 16px);
   min-height: var(--card-control-size);
   box-sizing: border-box;
-  background: transparent;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
-  cursor: pointer;
-  border: none;
+  gap: 2px;
+  border: 1px solid rgba(220, 38, 38, 0.18);
   z-index: 25;
   border-radius: var(--card-control-radius);
   corner-shape: squircle;
-  color: #dc2626;
-  padding: 0;
+  background: rgba(255, 255, 255, 0.88);
+  color: #991b1b;
+  padding: 0 10px 0 0;
   text-align: left;
-  font: inherit;
   overflow: hidden;
   user-select: none;
-  touch-action: manipulation;
-  box-shadow: none;
-  clip-path: inset(
-    0 calc(100% - var(--card-control-size)) 0 0
-    round var(--card-control-radius)
-  );
-  transition:
-    clip-path 0.16s ease-out,
-    background-color 0.15s ease-out,
-    box-shadow 0.2s ease-out,
-    color 0.15s ease-out,
-    border-radius 0.16s ease-out;
+  pointer-events: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.card-compatibility-warning .card-warning-icon-wrapper {
+.card-compatibility-status .card-warning-icon-wrapper {
   width: var(--card-control-size);
   height: var(--card-control-size);
   min-width: var(--card-control-size);
@@ -631,114 +617,28 @@ button {
   align-self: flex-start;
 }
 
-.card-compatibility-warning .card-warning-icon {
+.card-compatibility-status .card-warning-icon {
   display: block;
   width: var(--card-control-icon-size);
   height: var(--card-control-icon-size);
 }
 
-.card-compatibility-warning .card-warning-text {
-  width: calc(100% - var(--card-control-size));
+.card-compatibility-status .card-warning-text {
   min-width: 0;
-  flex: 1 1 auto;
   box-sizing: border-box;
   font-family: var(--font-main);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.2px;
   color: inherit;
-  padding:
-    calc((var(--card-control-size) - var(--card-warning-line-height)) / 2)
-    12px
-    calc((var(--card-control-size) - var(--card-warning-line-height)) / 2)
-    0;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
   line-height: var(--card-warning-line-height);
   white-space: normal;
-  transition:
-    opacity 0.1s ease-in,
-    visibility 0s linear 0.1s;
-}
-
-.card-compatibility-warning:focus-visible,
-.card-compatibility-warning.is-active {
-  height: auto;
-  border-radius: var(--card-control-radius);
-  corner-shape: squircle;
-  background: #DDDDDD;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  clip-path: inset(0 round var(--card-control-radius));
-  transition:
-    clip-path 0.22s cubic-bezier(0.32, 0.72, 0, 1),
-    background-color 0.15s ease-out,
-    box-shadow 0.2s ease-out,
-    color 0.15s ease-out,
-    border-radius 0.16s ease-out;
-}
-
-.card-compatibility-warning:focus-visible .card-warning-text,
-.card-compatibility-warning.is-active .card-warning-text {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transition:
-    opacity 0.12s ease-out 0.06s,
-    visibility 0s;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .card-compatibility-warning:hover {
-    height: auto;
-    border-radius: var(--card-control-radius);
-    corner-shape: squircle;
-    background: #DDDDDD;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    clip-path: inset(0 round var(--card-control-radius));
-    transition:
-      clip-path 0.22s cubic-bezier(0.32, 0.72, 0, 1),
-      background-color 0.15s ease-out,
-      box-shadow 0.2s ease-out,
-      color 0.15s ease-out,
-      border-radius 0.16s ease-out;
-  }
-
-  .card-compatibility-warning:hover .card-warning-text {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition:
-      opacity 0.12s ease-out 0.06s,
-      visibility 0s;
-  }
-}
-
-.card-compatibility-warning:active {
-  background: #cccccc;
-}
-
-.card-compatibility-warning:focus-visible {
-  outline: 2px solid #111;
-  outline-offset: 2px;
 }
 
 @media (pointer: coarse) {
   .slow-motion-toggle,
-  .widget-expand-trigger,
-  .card-compatibility-warning {
+  .widget-expand-trigger {
     --card-control-size: 44px;
-  }
-
-  .card-compatibility-warning.is-active {
-    height: auto;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card-compatibility-warning,
-  .card-compatibility-warning .card-warning-text {
-    transition: none;
   }
 }
 
@@ -1092,7 +992,10 @@ button {
   justify-content: center;
 }
 
-@media (max-width: 420px) {
+/* The card grid is already one track below 700px. Keep wide widgets on that
+   same track throughout the mobile range so they cannot create an implicit
+   second column or a narrower preview. */
+@media (max-width: 700px) {
   .wide-widget-card {
     grid-column: 1;
   }

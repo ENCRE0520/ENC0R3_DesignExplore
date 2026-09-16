@@ -558,6 +558,9 @@ export default function LiquidGlassButton({
       className={`${styles.root} liquid-glass-button-root`}
       style={rootStyle}
     >
+      {/* Keep the renderer host and its layout proposal on the same measured
+          pixel bounds. Fractional grid widths can otherwise leave a seam when
+          switching categories. */}
       {liquidEnabled && hasSurfaceSize && (
         <LiquidCanvas
           ref={liquidRef}
@@ -573,7 +576,6 @@ export default function LiquidGlassButton({
             <Html sizing="fill" zIndex={-2}>
               <div
                 className={styles.liquidSourcePress}
-                style={{ width: surfaceSize.width, height: surfaceSize.height }}
                 onLoadCapture={() => liquidRef.current?.invalidateFrame()}
               >
                 <div
