@@ -65,24 +65,17 @@ const shaderData = [
     showSlowMotion: false,
     tags: ['shader', 'motion', 'ambient', 'aurora', 'organic'],
     Component: FocusAuroraShader,
-    code: `/* Focus Aurora Flow */
-.focusArtwork {
-  background: linear-gradient(135deg, #7f9fff 0%, #9eaaf2 48%, #d7d4e6 100%);
-}
-
-.focusArtwork::before {
-  border-radius: 52% 48% 44% 56% / 34% 46% 54% 66%;
-  background: linear-gradient(145deg, #f0edf1 0%, #e2dce7 54%, #cbc3d4 100%);
-  filter: blur(7.2px);
-  animation: focus-curve-flow 14.5s linear infinite;
-}
-
-.focusArtwork::after {
-  border-radius: 56% 44% 64% 36% / 40% 54% 46% 60%;
-  background: radial-gradient(ellipse at 34% 26%, rgb(126 153 255 / 58%) 0%, rgb(170 177 239 / 38%) 38%, transparent 78%);
-  filter: blur(12.8px);
-  animation: focus-curve-light-flow 10.8s linear infinite;
-}`,
+    code: `/* Focus Aurora — Award Mesh Gradient */
+<MeshGradient
+  colors={['#7f9fff', '#9eaaf2', '#d7d4e6', '#f0edf1', '#e2dce7', '#cbc3d4']}
+  distortion={0.68}
+  frame={3700}
+  rotation={197}
+  speed={1}
+  swirl={0.16}
+  maxPixelCount={10000}
+  minPixelRatio={1}
+/>`,
   },
 ];
 

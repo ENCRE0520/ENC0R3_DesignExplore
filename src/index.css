@@ -585,19 +585,18 @@ button {
   top: 8px;
   left: 8px;
   max-width: calc(100% - 16px);
-  min-height: var(--card-control-size);
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  gap: 2px;
+  gap: 8px;
   border: 1px solid rgba(220, 38, 38, 0.18);
   z-index: 25;
   border-radius: var(--card-control-radius);
   corner-shape: squircle;
   background: rgba(255, 255, 255, 0.88);
   color: #991b1b;
-  padding: 0 10px 0 0;
+  padding: 8px;
   text-align: left;
   overflow: hidden;
   user-select: none;
@@ -606,9 +605,9 @@ button {
 }
 
 .card-compatibility-status .card-warning-icon-wrapper {
-  width: var(--card-control-size);
-  height: var(--card-control-size);
-  min-width: var(--card-control-size);
+  width: var(--card-control-icon-size);
+  height: var(--card-warning-line-height);
+  min-width: var(--card-control-icon-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,6 +623,7 @@ button {
 }
 
 .card-compatibility-status .card-warning-text {
+  flex: 1 1 auto;
   min-width: 0;
   box-sizing: border-box;
   font-family: var(--font-main);
